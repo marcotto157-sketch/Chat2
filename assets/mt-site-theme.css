@@ -94,6 +94,11 @@ body:not(.template-index) .product-item:focus-within,body:not(.template-index) .
 body.template-product .mt-payment-caption{background:#0b0d11!important;border:1px solid #fff!important;color:#fff!important;padding:3px 8px!important;box-shadow:none!important}
 body.template-product .mt-payment-caption b{color:#fff!important;letter-spacing:.02em}
 
+/* Fallback visual: mantém cards e galeria visíveis mesmo se o lazy-load atrasar */
+.product-item__image-wrapper .image--fade-in,
+.product-gallery .image--fade-in,
+.buy-together-main-product-image.image--fade-in{opacity:1!important;visibility:visible!important}
+
 /* V9: detalhes claros na compra e remoção da moldura impressa no guia */
 body.template-product .product-price-installment svg,
 body.template-product .product-price-installment svg path{fill:#fff!important;color:#fff!important}
