@@ -68,6 +68,7 @@
      loading="eager"/>
 {% else %}
                         <img class="product-gallery__image lazyload image--fade-in"
+                             src="{{ media | img_url: '1000x' }}"
                              data-src="{{ image_url }}"
                              data-widths="[{{ supported_sizes }}]"
                              data-sizes="auto"
@@ -187,7 +188,7 @@
                     {%- endcase -%}
 
                     <div class="aspect-ratio" style="padding-bottom: {{ 100.0 | divided_by: media.preview_image.aspect_ratio }}%">
-                      <img class="image--fade-in lazyload" data-src="{{ media | img_url: '130x' }}" alt="{{ media_alt | escape }}">
+                      <img class="image--fade-in lazyload" src="{{ media | img_url: '130x' }}" data-src="{{ media | img_url: '130x' }}" alt="{{ media_alt | escape }}">
                     </div>
                   </a>
                 {%- endfor -%}
