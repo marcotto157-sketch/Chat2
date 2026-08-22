@@ -116,6 +116,7 @@ function handleMutation(e, t) {
 }
 
 function startObserver() {
+    if (!miniCart) return;
     (observer = new MutationObserver(handleMutation), observer.observe(miniCart, {
         attributes: !0,
         attributeFilter: ["aria-hidden"]
@@ -130,3 +131,19 @@ window.addEventListener("load", startObserver), window.addEventListener("resize"
     startObserver()
 }));
 
+(function(){
+  function installKidsCampaign(){
+    var home=document.querySelector('.mt-home');
+    var nba=document.querySelector('.mt-hero--nba');
+    if(!home||!nba||document.querySelector('.mt-kids-campaign')) return;
+    var style=document.createElement('style');
+    style.textContent='.mt-kids-campaign{position:relative;overflow:hidden;background:#050807}.mt-kids-campaign>a,.mt-kids-campaign picture,.mt-kids-campaign img{display:block;width:100%}.mt-kids-campaign img{height:auto;max-width:none}.mt-kids-campaign>a{transition:opacity .25s}.mt-kids-campaign>a:hover{opacity:.97}';
+    document.head.appendChild(style);
+    var section=document.createElement('section');
+    section.className='mt-kids-campaign';
+    section.setAttribute('aria-label','Kits Infantis MT Sports');
+    section.innerHTML='<a href="/collections/kits-infantis" aria-label="Conhecer a coleção Kits Infantis"><picture><source media="(max-width: 999px)" srcset="https://cdn.shopify.com/s/files/1/0748/8415/3575/files/mt-kits-infantis-mobile.jpg?v=1787428749"><img src="https://cdn.shopify.com/s/files/1/0748/8415/3575/files/mt-kits-infantis-desktop.jpg?v=1787428726" alt="Kits Infantis MT Sports" loading="lazy" decoding="async"></picture></a>';
+    nba.parentNode.insertBefore(section,nba);
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',installKidsCampaign); else installKidsCampaign();
+})();
