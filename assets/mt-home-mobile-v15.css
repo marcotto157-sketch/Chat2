@@ -33,3 +33,17 @@
   .mt-slide--ready .mt-slide__content{width:60%!important;max-width:60%!important;padding-left:14px!important}
   .mt-retro-feature__content{padding-left:14px!important;width:50%!important;max-width:50%!important}
 }
+
+/* Desktop V16 — referência visual do tema ativo: 1800x600 (3:1). Mobile acima permanece intacto. */
+@media screen and (min-width:1000px){
+  .mt-slider,.mt-slide,.mt-slide__content{height:min(33.333vw,600px)!important;min-height:0!important;max-height:600px!important}
+  .mt-slide--one,.mt-slide--three,.mt-slide--four{background:#07080a!important}
+  .mt-slide--one picture,.mt-slide--three picture,.mt-slide--four picture,.mt-slide--one img,.mt-slide--three img,.mt-slide--four img{width:100%!important;height:100%!important}
+  .mt-slide--one img,.mt-slide--three img,.mt-slide--four img{object-fit:contain!important;object-position:center center!important}
+
+  .mt-retro-feature{height:min(33.333vw,600px)!important;min-height:0!important;max-height:600px!important;background:#050608!important}
+  .mt-retro-feature__content{min-height:0!important;height:100%!important}
+  .mt-retro-feature:before{display:none!important}
+  .mt-retro-feature__photo--desktop{display:block!important;position:absolute!important;inset:0!important;width:100%!important;height:100%!important;max-width:none!important;object-fit:contain!important;object-position:center center!important;transform:none!important;-webkit-mask-image:none!important;mask-image:none!important;filter:brightness(.72) contrast(1.04) saturate(.94)!important;background:#050608!important}
+  .mt-retro-feature__shade{background:linear-gradient(90deg,rgba(4,5,7,.94) 0%,rgba(4,5,7,.58) 40%,rgba(4,5,7,.08) 75%),linear-gradient(0deg,rgba(4,5,7,.55),transparent 50%)!important}
+}
