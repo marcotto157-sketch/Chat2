@@ -91,7 +91,7 @@
 
             <div class="aspect-ratio {% if settings.product_image_size != 'natural' %}aspect-ratio--{{ settings.product_image_size }}{% endif %}"
                  style="padding-bottom: {{ 100.0 | divided_by: primary_media.preview_image.aspect_ratio }}%">
-                <img class="product-item__primary-image lazyload image--fade-in" data-media-id="{{ primary_media.id }}"
+                <img class="product-item__primary-image lazyload image--fade-in" src="{{ primary_media.preview_image | img_url: '600x' }}" data-media-id="{{ primary_media.id }}"
                      data-src="{{ image_url }}" data-sizes="auto" data-widths="[{{ supported_sizes }}]"
                      alt="{{ primary_media.alt | escape }}">
 
@@ -99,7 +99,7 @@
                     {%- capture supported_sizes -%}{%- render 'image-size', sizes: '200,300,400,500,600,700,800', image: product.media[1].preview_image -%}{%- endcapture -%}
                     {%- assign image_url = product.media[1] | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
 
-                    <img class="product-item__secondary-image lazyload image--fade-in" data-src="{{ image_url }}"
+                    <img class="product-item__secondary-image lazyload image--fade-in" src="{{ product.media[1].preview_image | img_url: '600x' }}" data-src="{{ image_url }}"
                          data-sizes="auto" data-widths="[{{ supported_sizes }}]"
                          alt="{{ product.media[1].alt | escape }}">
                 {%- endif -%}
