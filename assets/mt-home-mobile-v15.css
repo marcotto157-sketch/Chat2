@@ -1,73 +1,28 @@
-/* MT Sports — enquadramentos exclusivos para mobile e tablet vertical */
+/* MT Sports — composição exclusiva mobile; desktop permanece intacto. */
 @media screen and (max-width:999px){
-  /* Pronta entrega: Memphis à direita e chamada livre à esquerda */
-  .mt-slide--ready:before{
-    background-position:72% center!important;
-  }
-  .mt-slide--ready .mt-slide__photo{
-    background-size:auto 100%!important;
-    background-position:72% top!important;
-    background-repeat:no-repeat!important;
-    transform:none!important;
-  }
-  .mt-slide--ready .mt-slide__content{
-    width:100%!important;
-    max-width:60%!important;
-    margin-left:0!important;
-    margin-right:auto!important;
-    padding-left:20px!important;
-    padding-right:0!important;
-  }
-  .mt-slide--ready h1{
-    font-size:clamp(30px,9vw,43px)!important;
-    line-height:.88!important;
-    letter-spacing:-.045em!important;
-    margin-bottom:12px!important;
-  }
-  .mt-slide--ready p{
-    max-width:100%!important;
-    font-size:12px!important;
-    line-height:1.38!important;
-  }
-
-  /* Categorias: duas camadas evitam faixas vazias sem cortar os rostos */
-  .mt-category--retro{
-    background-image:url("mt-zidane-retro-v3.jpg"),url("mt-zidane-retro-v3.jpg")!important;
-    background-size:auto 82%,cover!important;
-    background-position:center 60%,center 32%!important;
-    background-repeat:no-repeat!important;
-  }
-  .mt-category--selections{
-    background-image:url("mt-lamine-selections-v2.webp"),url("mt-lamine-selections-v2.webp")!important;
-    background-size:auto 83%,cover!important;
-    background-position:center 64%,center 38%!important;
-    background-repeat:no-repeat!important;
-  }
-
-  /* Boas lembranças: texto à esquerda e Ronaldinho claramente à direita */
-  .mt-retro-feature__photo{
-    inset:5% 4% auto auto!important;
-    width:auto!important;
-    height:79%!important;
-    max-width:none!important;
-    object-fit:contain!important;
-    object-position:center!important;
-    transform:none!important;
-  }
-  .mt-retro-feature__content{
-    width:100%!important;
-    max-width:56%!important;
-    margin-left:0!important;
-    margin-right:auto!important;
-    padding-left:18px!important;
-    padding-right:0!important;
-  }
-  .mt-retro-feature h2{
-    font-size:clamp(34px,10vw,48px)!important;
-    line-height:.88!important;
-  }
-  .mt-retro-feature__shade{
-    background:linear-gradient(90deg,rgba(4,5,7,.97) 0%,rgba(4,5,7,.76) 38%,rgba(4,5,7,.2) 67%,rgba(4,5,7,.05) 100%),linear-gradient(0deg,rgba(4,5,7,.94),rgba(4,5,7,.2) 68%,rgba(4,5,7,.05))!important;
-  }
+  .mt-slider,.mt-slide,.mt-slide__content{height:min(133vw,680px)!important;min-height:500px!important;max-height:680px!important}
+  .mt-slide--ready:before{display:none!important}
+  .mt-slide--ready .mt-slide__photo{background-image:url("mt-ready-memphis-mobile-v16.jpg")!important;background-size:cover!important;background-position:center!important;background-repeat:no-repeat!important;transform:none!important}
+  .mt-slide--ready .mt-slide__shade{background:linear-gradient(90deg,rgba(4,5,7,.91) 0%,rgba(4,5,7,.62) 42%,rgba(4,5,7,.08) 72%),linear-gradient(0deg,rgba(4,5,7,.76),transparent 52%)!important}
+  .mt-slide--ready .mt-slide__content{width:58%!important;max-width:58%!important;margin:0 auto 0 0!important;padding:0 0 44px 18px!important;justify-content:flex-end!important}
+  .mt-slide--ready h1{font-size:clamp(31px,9.3vw,45px)!important;line-height:.88!important;letter-spacing:-.045em!important;margin-bottom:12px!important}
+  .mt-slide--ready p{font-size:12px!important;line-height:1.35!important;max-width:100%!important}
+  .mt-category--retro{background-image:url("mt-zidane-retro-mobile-v16.jpg")!important;background-size:cover!important;background-position:center!important;background-repeat:no-repeat!important}
+  .mt-category--selections{background-image:url("mt-lamine-selections-mobile-v16.jpg")!important;background-size:cover!important;background-position:center!important;background-repeat:no-repeat!important}
+  .mt-retro-feature,.mt-retro-feature__content{min-height:min(142vw,700px)!important}
+  .mt-retro-feature__photo--desktop{display:none!important}
+  .mt-retro-feature__photo--mobile[hidden]{display:block!important}
+  .mt-retro-feature__photo{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;max-width:none!important;object-fit:cover!important;object-position:center!important;transform:none!important;filter:brightness(.78) contrast(1.04) saturate(.94)!important;-webkit-mask-image:none!important;mask-image:none!important;background:none!important}
+  .mt-retro-feature__shade{background:linear-gradient(90deg,rgba(4,5,7,.96) 0%,rgba(4,5,7,.72) 42%,rgba(4,5,7,.12) 72%),linear-gradient(0deg,rgba(4,5,7,.93),rgba(4,5,7,.14) 66%)!important}
+  .mt-retro-feature__content{width:57%!important;max-width:57%!important;margin:0 auto 0 0!important;padding:0 0 42px 18px!important;justify-content:flex-end!important;align-items:flex-start!important}
+  .mt-retro-feature h2{font-size:clamp(34px,10vw,48px)!important;line-height:.88!important;letter-spacing:-.045em!important}
+  .mt-retro-feature p{font-size:13px!important;line-height:1.4!important}
+  .mt-benefits__grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .mt-benefits__grid>div{min-height:74px!important;padding:12px 10px!important}
+  .mt-benefits__grid strong{font-size:11px!important}.mt-benefits__grid small{font-size:9px!important;line-height:1.25!important}
 }
-
+@media screen and (max-width:420px){
+  .mt-slider,.mt-slide,.mt-slide__content{height:132vw!important;min-height:480px!important;max-height:610px!important}
+  .mt-slide--ready .mt-slide__content{width:60%!important;max-width:60%!important;padding-left:14px!important;padding-bottom:34px!important}
+  .mt-retro-feature__content{padding-left:14px!important;width:59%!important;max-width:59%!important}
+}
