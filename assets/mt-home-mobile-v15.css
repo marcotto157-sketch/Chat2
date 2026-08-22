@@ -14,6 +14,13 @@
   .mt-retro-feature__photo--mobile[hidden]{display:block!important}
   .mt-retro-feature__photo{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;max-width:none!important;object-fit:cover!important;object-position:center!important;transform:none!important;filter:brightness(.78) contrast(1.04) saturate(.94)!important;-webkit-mask-image:none!important;mask-image:none!important;background:none!important}
   .mt-retro-feature__shade{background:linear-gradient(90deg,rgba(4,5,7,.96) 0%,rgba(4,5,7,.72) 42%,rgba(4,5,7,.12) 72%),linear-gradient(0deg,rgba(4,5,7,.93),rgba(4,5,7,.14) 66%)!important}
+  .mt-retro-feature:after{
+    content:""!important;display:block!important;position:absolute!important;inset:-8%!important;z-index:-1!important;
+    background:url("mt-smoke-overlay.png") 20% 8%/190% auto no-repeat!important;
+    opacity:.34!important;mix-blend-mode:screen!important;pointer-events:none!important;
+    -webkit-mask-image:linear-gradient(180deg,#000 0%,#000 62%,rgba(0,0,0,.72) 78%,transparent 100%)!important;
+    mask-image:linear-gradient(180deg,#000 0%,#000 62%,rgba(0,0,0,.72) 78%,transparent 100%)!important;
+  }
   .mt-retro-feature__content{width:49%!important;max-width:49%!important;margin:0 auto 0 0!important;padding:0 0 0 18px!important;justify-content:center!important;align-items:flex-start!important;transform:translateY(-5%)!important}
   .mt-retro-feature h2{font-size:clamp(34px,10vw,48px)!important;line-height:.88!important;letter-spacing:-.045em!important}
   .mt-retro-feature p{font-size:13px!important;line-height:1.4!important}
