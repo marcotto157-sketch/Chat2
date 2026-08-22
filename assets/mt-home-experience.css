@@ -101,3 +101,28 @@
   .mt-retro-feature h2{font-size:clamp(39px,12vw,54px)!important;margin-bottom:12px!important}
   .mt-retro-feature p{font-size:13px!important;margin-bottom:18px!important}
 }
+
+/* V12: enquadramento mobile — rosto livre do texto e atletas sem corte */
+@media(max-width:700px){
+  .mt-category--retro{
+    background-image:url("mt-zidane-retro-v3.jpg"),url("mt-zidane-retro-v3.jpg")!important;
+    background-size:auto 96%,cover!important;
+    background-position:center center,center 34%!important;
+    background-repeat:no-repeat!important;
+  }
+  .mt-retro-feature:before{
+    background-position:center center!important;
+    filter:blur(20px) brightness(.3) saturate(.85)!important;
+  }
+  .mt-retro-feature__photo{
+    inset:4% 27% auto auto!important;
+    height:82%!important;
+    transform:translateX(50%)!important;
+    object-position:center!important;
+  }
+  .mt-retro-feature__shade{
+    background:linear-gradient(90deg,rgba(4,5,7,.96) 0%,rgba(4,5,7,.7) 42%,rgba(4,5,7,.18) 72%,rgba(4,5,7,.08) 100%),linear-gradient(0deg,rgba(4,5,7,.96) 0%,rgba(4,5,7,.34) 66%,rgba(4,5,7,.08) 100%)!important;
+  }
+  .mt-retro-feature__content{max-width:63%!important}
+  .mt-retro-feature h2{font-size:clamp(37px,11vw,50px)!important}
+}
