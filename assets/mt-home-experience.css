@@ -126,3 +126,21 @@
   .mt-retro-feature__content{max-width:63%!important}
   .mt-retro-feature h2{font-size:clamp(37px,11vw,50px)!important}
 }
+
+/* V13: slide Pronta Entrega com leitura e enquadramento próprios no mobile */
+@media(max-width:700px){
+  .mt-slide--ready .mt-slide__photo{
+    background-position:66% top!important;
+  }
+  .mt-slide--ready .mt-slide__content{
+    max-width:68%!important;
+    padding-left:20px!important;
+    padding-right:0!important;
+  }
+  .mt-slide--ready h1{
+    font-size:clamp(32px,9.5vw,43px)!important;
+    line-height:.88!important;
+    letter-spacing:-.045em!important;
+  }
+  .mt-slide--ready p{max-width:100%!important}
+}
