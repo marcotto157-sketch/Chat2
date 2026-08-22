@@ -130,3 +130,57 @@ function stopObserver() {
 window.addEventListener("load", startObserver), window.addEventListener("resize", (function () {
     startObserver()
 }));
+
+(function(){
+  function moneyBRL(value){
+    var n=Number(value||0);
+    return n.toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
+  }
+  function escapeHtml(value){
+    return String(value||'').replace(/[&<>'"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]});
+  }
+  function card(product){
+    var variant=product.variants&&product.variants[0]?product.variants[0]:{};
+    var price=Number(variant.price||0);
+    var pix=price*0.95;
+    var image=(product.images&&product.images[0]&&product.images[0].src)||'';
+    var url='/products/'+product.handle;
+    return '<article class="mt-card"><a class="mt-card__image" href="'+url+'">'+(image?'<img src="'+escapeHtml(image)+'" alt="'+escapeHtml(product.title)+'" loading="lazy">':'')+'</a><div class="mt-card__body"><h3><a href="'+url+'">'+escapeHtml(product.title)+'</a></h3><div class="mt-card__price">'+moneyBRL(pix)+' <small>no Pix</small></div><div class="mt-card__installment">ou '+moneyBRL(price)+' nos demais pagamentos</div><div class="mt-card__promo"><span>MT</span><strong>LEVE 3 • PAGUE 2</strong><small>Combine seus produtos</small></div></div></article>';
+  }
+  function hasHeading(text){
+    return Array.prototype.some.call(document.querySelectorAll('.mt-heading h2'),function(h){return h.textContent.trim().toUpperCase()===text.toUpperCase()});
+  }
+  function makeSection(cfg,products){
+    var section=document.createElement('section');
+    section.className='mt-section mt-section--dark mt-auto-collection';
+    section.setAttribute('data-mt-auto-collection',cfg.handle);
+    section.innerHTML='<div class="mt-shell"><div class="mt-heading"><div><span>'+cfg.eyebrow+'</span><h2>'+cfg.title+'</h2></div><a href="/collections/'+cfg.handle+'">VER TODOS</a></div><div class="mt-products">'+products.slice(0,6).map(card).join('')+'</div></div>';
+    return section;
+  }
+  function loadCollection(cfg,anchor,position){
+    if(!anchor||hasHeading(cfg.title)||document.querySelector('[data-mt-auto-collection="'+cfg.handle+'"]')) return;
+    fetch('/collections/'+cfg.handle+'/products.json?limit=6',{credentials:'same-origin'})
+      .then(function(r){if(!r.ok)throw new Error('collection');return r.json();})
+      .then(function(data){
+        if(!data.products||!data.products.length)return;
+        var section=makeSection(cfg,data.products);
+        if(position==='before') anchor.parentNode.insertBefore(section,anchor);
+        else anchor.parentNode.insertBefore(section,anchor.nextSibling);
+      }).catch(function(){});
+  }
+  function install(){
+    var home=document.querySelector('.mt-home');
+    if(!home)return;
+    if(!document.getElementById('mt-retro-desktop-fix')){
+      var style=document.createElement('style');
+      style.id='mt-retro-desktop-fix';
+      style.textContent='@media (min-width:701px){.mt-retro-feature__photo--desktop{inset:4% 1% auto auto!important;height:92%!important;width:auto!important;max-width:none!important;object-fit:contain!important;object-position:center top!important}}';
+      document.head.appendChild(style);
+    }
+    var nba=document.querySelector('.mt-hero--nba');
+    loadCollection({handle:'kits-infantis',eyebrow:'PEQUENOS CRAQUES',title:'KITS INFANTIS'},nba,'before');
+    var retro=document.querySelector('.mt-retro-feature');
+    loadCollection({handle:'retro-1',eyebrow:'HISTÓRIA EM CAMPO',title:'CAMISAS RETRÔ'},retro,'after');
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',install);else install();
+})();
