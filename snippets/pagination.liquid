@@ -1,3 +1,11 @@
+<style>
+body:not(.template-index) .pagination__prev,
+body:not(.template-index) .pagination__next,
+body:not(.template-index) .pagination__page-count,
+body:not(.template-index) .pagination__nav-item:not(.is-active){color:#fff!important;opacity:1!important;}
+body:not(.template-index) .pagination__prev svg,
+body:not(.template-index) .pagination__next svg{fill:#fff!important;color:#fff!important;}
+</style>
 {%- if paginate.pages > 1 -%}
   <div class="pagination">
     <div class="pagination__inner">
