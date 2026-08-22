@@ -144,3 +144,21 @@
   }
   .mt-slide--ready p{max-width:100%!important}
 }
+
+/* V14: ajuste fino dos atletas nos cartões e faixa retrô mobile */
+@media(max-width:700px){
+  .mt-category--retro{
+    background-size:auto 86%,cover!important;
+    background-position:center 58%,center 34%!important;
+  }
+  .mt-category--selections{
+    background-image:url("mt-lamine-selections-v2.webp"),url("mt-lamine-selections-v2.webp")!important;
+    background-size:auto 87%,cover!important;
+    background-position:center 62%,center 38%!important;
+    background-repeat:no-repeat!important;
+  }
+  .mt-retro-feature__photo{
+    inset:4% 15% auto auto!important;
+    height:82%!important;
+  }
+}
