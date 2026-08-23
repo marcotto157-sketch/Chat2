@@ -2,14 +2,18 @@
 <script>
 (function(){
   window.__mtCartManualCheckout=true;
-  function neutralizeAutoCheckout(){
-    document.querySelectorAll('a[href*="/checkout"],form[action*="/checkout"]').forEach(function(el){if(el.closest('#mini-cart'))return;});
+  function isInsideCart(el){return !!(el&&el.closest&&el.closest('#mini-cart'));}
+  function stopAutoCheckout(e){
+    var el=e.target&&e.target.closest?e.target.closest('a,button,input,form'):null;
+    if(!isInsideCart(el)) return;
+    var href=(el.getAttribute&&el.getAttribute('href'))||'';
+    var name=(el.getAttribute&&el.getAttribute('name'))||'';
+    if(/checkout/i.test(href)||name==='checkout') return; // só o clique explícito de finalizar pode sair
   }
-  document.addEventListener('click',function(e){
-    var checkout=e.target.closest('#mini-cart a[href*="checkout"],#mini-cart button[name="checkout"],#mini-cart input[name="checkout"]');
-    if(checkout){ return; }
-  },true);
-  document.addEventListener('cart:refresh',neutralizeAutoCheckout);
-  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',neutralizeAutoCheckout);else neutralizeAutoCheckout();
+  document.addEventListener('click',stopAutoCheckout,true);
+  document.addEventListener('cart:refresh',function(){
+    // mantém o cliente no drawer; checkout somente por ação explícita
+    if(location.pathname.indexOf('/checkout')===-1){window.__mtCartManualCheckout=true;}
+  });
 })();
 </script>
