@@ -34,21 +34,14 @@
   .mt-slide--one,.mt-slide--three,.mt-slide--four{background:#07080a!important}
   .mt-slide--one picture,.mt-slide--three picture,.mt-slide--four picture{position:absolute!important;inset:0!important;display:flex!important;align-items:center!important;justify-content:center!important;width:100%!important;height:100%!important}
   .mt-slide--one img,.mt-slide--three img,.mt-slide--four img{position:absolute!important;inset:0!important;display:block!important;width:100%!important;height:100%!important;max-width:none!important;max-height:none!important;object-fit:cover!important;object-position:center center!important;transform:none!important}
-
-  /* Memphis: preenche o banner normalmente, sem faixa preta/contain */
   .mt-slide--ready .mt-slide__photo{background-size:cover!important;background-position:center 24%!important;background-repeat:no-repeat!important;transform:none!important}
   .mt-slide--ready .mt-slide__content{height:100%!important;min-height:0!important;transform:none!important}
-
-  /* Categorias: restauradas para cards cheios, sem barras pretas */
   .mt-category{background-size:cover!important;background-repeat:no-repeat!important;background-color:#11141a!important}
   .mt-category--brasil{background-size:cover!important;background-position:center 26%!important}
   .mt-category--europe{background-size:cover!important;background-position:center 28%!important}
   .mt-category--selections{background-size:cover!important;background-position:center 34%!important}
   .mt-category--retro{background-size:cover!important;background-position:center 24%!important}
-
   .mt-hero--nba .mt-hero__photo{background-size:cover!important;background-position:center 30%!important;background-repeat:no-repeat!important;transform:none!important;background-color:#07080a!important}
-
-  /* Ronaldinho: fundo cheio e contínuo, sem imagem solta por cima */
   .mt-retro-feature{height:min(33.333vw,600px)!important;min-height:0!important;max-height:600px!important;background:#050608!important}
   .mt-retro-feature__content{min-height:0!important;height:100%!important;max-width:none!important;width:min(1440px,calc(100% - 48px))!important;margin:0 auto!important;padding:0!important;transform:none!important}
   .mt-retro-feature:before{display:none!important}
@@ -56,3 +49,12 @@
   .mt-retro-feature__photo--desktop{display:block!important;position:absolute!important;inset:0!important;width:100%!important;height:100%!important;max-width:none!important;object-fit:cover!important;object-position:center 36%!important;transform:none!important;-webkit-mask-image:none!important;mask-image:none!important;filter:brightness(.72) contrast(1.04) saturate(.94)!important;background:none!important}
   .mt-retro-feature__shade{background:linear-gradient(90deg,rgba(4,5,7,.96) 0%,rgba(4,5,7,.62) 40%,rgba(4,5,7,.08) 73%),linear-gradient(0deg,rgba(4,5,7,.68),transparent 48%)!important}
 }
+
+/* V16 final — Boas Lembranças como uma única arte, sem camada flutuando sobre outro fundo */
+.mt-retro-feature{background:#050506!important;isolation:isolate!important}
+.mt-retro-feature:before,.mt-retro-feature:after{display:none!important;content:none!important;background:none!important}
+.mt-retro-feature__photo{z-index:0!important;position:absolute!important;inset:0!important;width:100%!important;height:100%!important;max-width:none!important;object-fit:cover!important;transform:none!important;-webkit-mask-image:none!important;mask-image:none!important;mix-blend-mode:normal!important;background:none!important}
+.mt-retro-feature__shade{z-index:1!important;position:absolute!important;inset:0!important;pointer-events:none!important;background:linear-gradient(90deg,rgba(3,4,6,.92) 0%,rgba(3,4,6,.62) 34%,rgba(3,4,6,.18) 62%,rgba(3,4,6,.06) 100%),linear-gradient(0deg,rgba(3,4,6,.58),transparent 58%)!important}
+.mt-retro-feature__content{position:relative!important;z-index:2!important}
+@media screen and (min-width:701px){.mt-retro-feature__photo--desktop{display:block!important;object-position:center 36%!important}.mt-retro-feature__photo--mobile{display:none!important}}
+@media screen and (max-width:700px){.mt-retro-feature__photo--desktop{display:none!important}.mt-retro-feature__photo--mobile[hidden]{display:block!important;object-position:center!important}.mt-retro-feature__shade{background:linear-gradient(90deg,rgba(3,4,6,.94) 0%,rgba(3,4,6,.70) 38%,rgba(3,4,6,.18) 70%),linear-gradient(0deg,rgba(3,4,6,.58),transparent 62%)!important}}

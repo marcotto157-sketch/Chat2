@@ -1,18 +1,31 @@
 /* MT Sports — drawer preto e compra em duas etapas */
-#mini-cart,.mini-cart,.mini-cart form,.mini-cart .justWrapper,.mini-cart .mini-cart__inner,.mini-cart .mini-cart__content,.mini-cart .mini-cart__recap,.mini-cart .drawer__header{background:#000!important;color:#fff!important}
-#mini-cart *,#mini-cart a,#mini-cart button{color:#fff!important}
-#mini-cart .button--primary,#mini-cart .mini-cart__recap a.button--primary{background:#fff!important;color:#000!important;border-color:#fff!important}
-#mini-cart .button--secondary{background:#111!important;color:#fff!important;border-color:#555!important}
-#mini-cart .quantity-selector{background:#111!important;border-color:#555!important}
-#mini-cart .quantity-selector__value{background:#111!important;color:#fff!important}
-#mini-cart svg,#mini-cart svg path{fill:currentColor!important}
-#mini-cart{border-left:1px solid #333!important}
-@media(max-width:640px){#mini-cart,.justWrapper,#mini-cart form{width:min(92vw,420px)!important;max-width:92vw!important}.mini-cart__recap{position:relative!important;bottom:auto!important;background:#000!important}}
+#mini-cart,.mini-cart,.mini-cart form,.mini-cart .justWrapper,.mini-cart .mini-cart__inner,.mini-cart .mini-cart__content,.mini-cart .mini-cart__recap,.mini-cart .drawer__header{background:#050506!important;color:#fff!important}
+#mini-cart *,#mini-cart a,#mini-cart button,.mini-cart *,.mini-cart a,.mini-cart button{color:#fff!important;opacity:1!important}
+#mini-cart,.mini-cart{border-left:1px solid #333!important}
+
+/* força legibilidade de TODOS os textos do drawer */
+.mini-cart .heading,.mini-cart h1,.mini-cart h2,.mini-cart h3,.mini-cart p,.mini-cart span,.mini-cart strong,.mini-cart small,.mini-cart label,
+.mini-cart .mini-cart__product-title,.mini-cart .mini-cart__product-title a,.mini-cart .product-item__title,.mini-cart .product-item__title a,
+.mini-cart .price,.mini-cart .money,.mini-cart .price-list,.mini-cart .mini-cart__product-price,.mini-cart .mini-cart__recap-price-line,.mini-cart .mini-cart__recap-price-line *,
+.mini-cart .mini-cart__amount-saved,.mini-cart .text--strong,.mini-cart .text--subdued,.mini-cart .product-item__price-list,.mini-cart .product-item__price-list *,
+.mini-cart .parcelamento,.mini-cart .parcelamento *,.mini-cart .installment,.mini-cart .installment *{color:#fff!important;opacity:1!important}
+
+.mini-cart .quantity-selector,#mini-cart .quantity-selector{background:#11141a!important;border-color:#555!important;color:#fff!important}
+.mini-cart .quantity-selector__value,#mini-cart .quantity-selector__value,.mini-cart input{background:#11141a!important;color:#fff!important;border-color:#555!important}
+.mini-cart svg,.mini-cart svg path,#mini-cart svg,#mini-cart svg path{fill:currentColor!important;color:#fff!important;stroke:currentColor!important}
+
+/* inclusive continuar comprando / checkout: texto branco */
+#mini-cart .button--primary,#mini-cart .button--secondary,.mini-cart .button--primary,.mini-cart .button--secondary,.mini-cart a.button,.mini-cart button.button{background:#11141a!important;color:#fff!important;border:1px solid #fff!important}
+#mini-cart .button--primary *,#mini-cart .button--secondary *,.mini-cart .button--primary *,.mini-cart .button--secondary *{color:#fff!important}
+#mini-cart .button--primary:hover,#mini-cart .button--secondary:hover,.mini-cart .button--primary:hover,.mini-cart .button--secondary:hover{background:#fff!important;color:#050506!important}
+#mini-cart .button--primary:hover *,#mini-cart .button--secondary:hover *,.mini-cart .button--primary:hover *,.mini-cart .button--secondary:hover *{color:#050506!important}
+
+@media(max-width:640px){#mini-cart,.justWrapper,#mini-cart form{width:min(92vw,420px)!important;max-width:92vw!important}.mini-cart__recap{position:relative!important;bottom:auto!important;background:#050506!important}}
+
 /* quantidade do PDP sem corte */
 body.template-product .evolution-quantity-selector{height:56px!important;width:96px!important;padding:3px!important;overflow:visible!important;align-items:stretch!important}
 body.template-product .evolution-quantity-selector__value{width:56px!important;height:48px!important;min-width:56px!important;padding:0!important;line-height:48px!important}
 body.template-product .evolution-quantity-container{width:34px!important;height:48px!important;min-width:34px!important;overflow:visible!important}
 body.template-product .evolution-quantity-selector__button{width:34px!important;height:24px!important;min-height:24px!important;line-height:24px!important;overflow:visible!important;flex:0 0 24px!important}
 body.template-product .evolution-quantity-selector__button svg{width:11px!important;height:11px!important;display:block!important}
-/* sacolinha no botão */
 body.template-product .product-form__add-button:before{content:'\f291'!important;font-family:'Font Awesome 5 Free'!important;font-weight:900!important;display:inline-block!important;margin-right:9px!important;color:currentColor!important;font-size:17px!important}
