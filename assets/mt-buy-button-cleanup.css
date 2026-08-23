@@ -1,0 +1,49 @@
+/* MT Sports — correção cirúrgica do botão COMPRAR AGORA. Remove qualquer sacola/ícone legado sem alterar dimensões ou estrutura do tema. */
+html body.template-product .product-form__add-button,
+html body.template-product .botaoflutuante .button--primary{
+  background-image:none!important;
+}
+html body.template-product .product-form__add-button::before,
+html body.template-product .product-form__add-button::after,
+html body.template-product .botaoflutuante .button--primary::before,
+html body.template-product .botaoflutuante .button--primary::after{
+  content:none!important;
+  display:none!important;
+  background:none!important;
+  background-image:none!important;
+}
+html body.template-product .product-form__add-button>img,
+html body.template-product .product-form__add-button>picture,
+html body.template-product .product-form__add-button>svg,
+html body.template-product .product-form__add-button>i,
+html body.template-product .product-form__add-button>[class*=\"bag\"],
+html body.template-product .product-form__add-button>[class*=\"sacola\"],
+html body.template-product .product-form__add-button>[class*=\"shopping-bag\"],
+html body.template-product .botaoflutuante .button--primary>img,
+html body.template-product .botaoflutuante .button--primary>picture,
+html body.template-product .botaoflutuante .button--primary>svg,
+html body.template-product .botaoflutuante .button--primary>i{
+  display:none!important;
+}
+html body.template-product .product-form__add-button .mt-buy-cart-icon,
+html body.template-product .botaoflutuante .button--primary .mt-buy-cart-icon{
+  display:inline-flex!important;
+  width:20px!important;
+  height:20px!important;
+  flex:0 0 20px!important;
+  align-items:center!important;
+  justify-content:center!important;
+  margin:0 9px 0 0!important;
+  padding:0!important;
+  background:none!important;
+}
+html body.template-product .product-form__add-button .mt-buy-cart-icon svg,
+html body.template-product .botaoflutuante .button--primary .mt-buy-cart-icon svg{
+  display:block!important;
+  width:20px!important;
+  height:20px!important;
+  margin:0!important;
+  padding:0!important;
+  fill:none!important;
+  stroke:currentColor!important;
+}
