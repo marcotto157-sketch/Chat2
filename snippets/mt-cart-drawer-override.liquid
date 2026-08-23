@@ -1,13 +1,11 @@
 <link rel="stylesheet" href="{{ 'mt-cart-drawer.css' | asset_url }}">
+<link rel="stylesheet" href="{{ 'mt-final-fixes-v17.css' | asset_url }}">
 <style>
-/* quantidade PDP: sem corte */
 body.template-product .evolution-quantity-selector{width:94px!important;height:54px!important;padding:3px!important;overflow:visible!important;flex-shrink:0!important}
 body.template-product .evolution-quantity-selector__value{width:56px!important;min-width:56px!important;height:46px!important;padding:0!important}
 body.template-product .evolution-quantity-container{width:29px!important;min-width:29px!important;height:46px!important;overflow:visible!important}
 body.template-product .evolution-quantity-selector__button{width:29px!important;height:22px!important;min-height:22px!important;line-height:22px!important;overflow:visible!important}
-/* sacolinha sem depender de FontAwesome */
 body.template-product .product-form__add-button:before,body.template-product .botaoflutuante .button--primary:before{content:'🛍'!important;font-family:Arial,sans-serif!important;font-size:20px!important;line-height:1!important;margin-right:9px!important;display:inline-block!important}
-/* drawer preto */
 #mini-cart,.mini-cart,.mini-cart .justWrapper,.mini-cart .mini-cart__inner,.mini-cart .mini-cart__content,.mini-cart .mini-cart__recap,.mini-cart header.drawer__header{background:#050506!important;color:#fff!important}
 #mini-cart *{color:#fff!important;border-color:#343840!important}
 #mini-cart .quantity-selector,#mini-cart .quantity-selector__button,#mini-cart .quantity-selector__value{background:#11141a!important;color:#fff!important}
@@ -21,5 +19,27 @@ body.template-product .product-form__add-button:before,body.template-product .bo
  function cleanHome(){document.querySelectorAll('[data-mt-auto-collection="kits-infantis"]').forEach(function(e){e.remove();});}
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',cleanHome);else cleanHome();
  new MutationObserver(cleanHome).observe(document.documentElement,{childList:true,subtree:true});
+})();
+(function(){
+ function bindMenuFallback(){
+   var btn=document.querySelector('.header__mobile-nav-toggle[data-action="toggle-menu"]');
+   var menu=document.getElementById('mobile-menu');
+   if(!btn||!menu||btn.dataset.mtMenuFallback==='1')return;
+   btn.dataset.mtMenuFallback='1';
+   btn.addEventListener('click',function(){
+     var before=menu.getAttribute('aria-hidden');
+     setTimeout(function(){
+       if(menu.getAttribute('aria-hidden')===before){
+         var opening=before!=='false';
+         menu.setAttribute('aria-hidden',opening?'false':'true');
+         btn.setAttribute('aria-expanded',opening?'true':'false');
+         if(opening){menu.setAttribute('data-mt-fallback-open','true');document.documentElement.style.overflow='hidden';}
+         else{menu.removeAttribute('data-mt-fallback-open');document.documentElement.style.overflow='';}
+       }
+     },80);
+   });
+   document.addEventListener('keydown',function(e){if(e.key==='Escape'&&menu.getAttribute('data-mt-fallback-open')==='true'){menu.setAttribute('aria-hidden','true');menu.removeAttribute('data-mt-fallback-open');btn.setAttribute('aria-expanded','false');document.documentElement.style.overflow='';}});
+ }
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',bindMenuFallback);else bindMenuFallback();
 })();
 </script>
