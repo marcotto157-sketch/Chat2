@@ -1,24 +1,60 @@
-/* MT Sports - acabamento final Ronaldinho + reviews; não altera carrinho */
-.mt-retro-feature{position:relative!important;overflow:hidden!important;background:#050506!important;isolation:isolate!important}
-.mt-retro-feature:before{content:""!important;display:block!important;position:absolute!important;inset:-7%!important;z-index:0!important;background:url("mt-ronaldinho-user-desktop.webp") center/cover no-repeat!important;filter:blur(22px) brightness(.30) saturate(.82)!important;transform:scale(1.10)!important}
-.mt-retro-feature:after{content:""!important;display:block!important;position:absolute!important;inset:0!important;z-index:2!important;pointer-events:none!important;background:linear-gradient(90deg,#050506 0%,rgba(5,5,6,.94) 19%,rgba(5,5,6,.56) 42%,rgba(5,5,6,.12) 68%,rgba(5,5,6,.25) 100%),linear-gradient(0deg,#050506 0%,rgba(5,5,6,.06) 25%,rgba(5,5,6,.06) 78%,#050506 100%)!important}
-.mt-retro-feature__photo{display:block!important;position:absolute!important;inset:0!important;width:100%!important;height:100%!important;z-index:1!important;object-fit:contain!important;object-position:right center!important;background:transparent!important}
+/* MT Sports — acabamento final V22: banner principal + Ronaldinho mobile/desktop */
+
+/* ---------- RETRÔ / RONALDINHO ---------- */
+.mt-retro-feature{position:relative!important;overflow:hidden!important;background:#11141a!important;isolation:isolate!important}
+.mt-retro-feature:before,.mt-retro-feature:after{display:none!important;content:none!important;background:none!important}
+.mt-retro-feature__photo{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;max-width:none!important;object-fit:cover!important;transform:none!important;-webkit-mask-image:none!important;mask-image:none!important;background:none!important}
+.mt-retro-feature__photo--desktop{display:block!important;z-index:0!important;object-position:center 36%!important;filter:brightness(.74) contrast(1.04) saturate(.95)!important}
 .mt-retro-feature__photo--mobile{display:none!important}
-.mt-retro-feature__shade{position:absolute!important;inset:0!important;z-index:3!important;background:linear-gradient(90deg,rgba(5,5,6,.97),rgba(5,5,6,.64) 39%,rgba(5,5,6,.10) 72%)!important;pointer-events:none!important}
-.mt-retro-feature__content{position:relative!important;z-index:4!important}
-.mt-retro-feature .mt-kicker{display:flex!important;align-items:center!important;gap:16px!important;font-weight:800!important;letter-spacing:.22em!important}.mt-retro-feature .mt-kicker:before{content:""!important;width:42px!important;height:3px!important;background:#c8102e!important;display:block!important}
-.mt-retro-feature h2{font-size:clamp(52px,6.5vw,104px)!important;line-height:.84!important;letter-spacing:-.055em!important;font-weight:900!important;margin:16px 0 20px!important;color:#fff!important}.mt-retro-feature h2 br+*{color:#fff!important}
-.mt-retro-feature p{color:#fff!important;max-width:610px!important}
+.mt-retro-feature__shade{position:absolute!important;inset:0!important;z-index:1!important;pointer-events:none!important;background:linear-gradient(90deg,rgba(17,20,26,.96) 0%,rgba(17,20,26,.66) 40%,rgba(17,20,26,.12) 72%,rgba(17,20,26,.04) 100%)!important}
+.mt-retro-feature__content{position:relative!important;z-index:2!important}
 
-.mt-reviews-dark{background:#050506!important;color:#fff!important;border:0!important;display:block!important;visibility:visible!important;opacity:1!important}.mt-reviews-dark:before,.mt-reviews-dark:after{display:none!important}.mt-reviews-dark .section__header,.mt-reviews-dark .section__title,.mt-reviews-dark .review-audited{border:0!important;color:#fff!important}.mt-reviews-dark .review-list{display:flex!important;gap:12px!important;overflow-x:auto!important;visibility:visible!important;opacity:1!important}.mt-reviews-dark .review{display:block!important;flex:0 0 calc(25% - 9px)!important;width:auto!important;visibility:visible!important;opacity:1!important;transform:none!important}.mt-reviews-dark .review-card{display:block!important;min-height:185px!important;background:#11141a!important;border:1px solid #30343c!important;color:#fff!important;padding:20px!important}.mt-reviews-dark .review-heading,.mt-reviews-dark .review-body{color:#fff!important;opacity:1!important}.mt-reviews-dark .review-subheading{color:#c6cad0!important;opacity:1!important}.mt-reviews-dark .review-audited{display:flex!important;align-items:center!important;justify-content:center!important;gap:8px!important;margin-top:16px!important;opacity:1!important;visibility:visible!important}.mt-reviews-dark .review-audited img{display:inline-block!important;width:90px!important;height:auto!important;filter:none!important;opacity:1!important;visibility:visible!important}
-
-@media(max-width:700px){
- .mt-retro-feature:before{background-image:url("mt-ronaldinho-user-mobile.webp")!important;background-position:center!important;filter:blur(18px) brightness(.31) saturate(.84)!important}
- .mt-retro-feature__photo--desktop{display:none!important}
- .mt-retro-feature__photo--mobile{display:block!important;object-fit:contain!important;object-position:center bottom!important;width:100%!important;height:100%!important}
- .mt-retro-feature:after{background:linear-gradient(0deg,#050506 0%,rgba(5,5,6,.82) 28%,rgba(5,5,6,.14) 62%,rgba(5,5,6,.16) 100%)!important}
- .mt-retro-feature__shade{background:linear-gradient(0deg,rgba(5,5,6,.94),rgba(5,5,6,.48) 42%,rgba(5,5,6,.02) 72%)!important}
- .mt-retro-feature__content{display:flex!important;min-height:100%!important;flex-direction:column!important;justify-content:flex-end!important;padding-bottom:38px!important}
- .mt-retro-feature h2{font-size:clamp(43px,13vw,64px)!important}
- .mt-reviews-dark .review{flex:0 0 88%!important}
+@media screen and (max-width:700px){
+  .mt-retro-feature{height:min(126vw,620px)!important;min-height:500px!important;max-height:620px!important;background-image:url("mt-ronaldinho-user-desktop.webp")!important;background-size:cover!important;background-position:72% center!important;background-repeat:no-repeat!important}
+  .mt-retro-feature__photo--desktop,.mt-retro-feature__photo--mobile{display:none!important}
+  .mt-retro-feature__shade{background:linear-gradient(90deg,rgba(17,20,26,.97) 0%,rgba(17,20,26,.76) 40%,rgba(17,20,26,.26) 66%,rgba(17,20,26,.04) 100%),linear-gradient(0deg,rgba(17,20,26,.72) 0%,rgba(17,20,26,.18) 46%,rgba(17,20,26,.04) 100%)!important}
+  .mt-retro-feature__content{width:58%!important;max-width:58%!important;height:100%!important;min-height:0!important;margin:0!important;padding:0 0 0 22px!important;display:flex!important;flex-direction:column!important;align-items:flex-start!important;justify-content:center!important;transform:translateY(-2%)!important}
+  .mt-retro-feature .mt-kicker{font-size:11px!important;line-height:1.4!important;margin-bottom:14px!important;gap:10px!important}
+  .mt-retro-feature .mt-kicker:before{width:28px!important}
+  .mt-retro-feature h2{font-size:clamp(37px,10.6vw,50px)!important;line-height:.86!important;letter-spacing:-.045em!important;margin:0 0 14px!important;max-width:100%!important}
+  .mt-retro-feature p{font-size:13px!important;line-height:1.4!important;max-width:100%!important;margin:0 0 18px!important;color:#fff!important}
+  .mt-retro-feature .mt-button{min-height:46px!important;padding:0 18px!important;font-size:10px!important}
 }
+
+/* ---------- BANNER PRINCIPAL ---------- */
+.mt-main-banner-v21,.mt-main-banner-v21__viewport,.mt-main-banner-v21__slide{background:#11141a!important}
+.mt-main-banner-v21__viewport{width:100%!important;max-width:none!important}
+@media screen and (min-width:701px){
+  .mt-main-banner-v21__slide:not(.mt-main-banner-v21__slide--memphis) picture{background:#11141a!important;overflow:hidden!important}
+  .mt-main-banner-v21__slide:not(.mt-main-banner-v21__slide--memphis) picture img{width:100%!important;height:100%!important;object-fit:cover!important;object-position:center!important;transform:none!important}
+  .mt-main-banner-v21__slide:not(.mt-main-banner-v21__slide--memphis):after{display:none!important;content:none!important;box-shadow:none!important}
+  .mt-main-banner-v21__memphis-bg{background-size:cover!important;background-position:center!important}
+  .mt-main-banner-v21__memphis-photo{background-position:right center!important;background-size:contain!important}
+}
+
+@media screen and (max-width:700px){
+  .mt-main-banner-v21__viewport{aspect-ratio:750/1100!important;background:#11141a!important}
+  .mt-main-banner-v21__slide--memphis{background:#11141a!important}
+  .mt-main-banner-v21__memphis-bg{background-image:url("mt-ready-memphis-mobile-v16.jpg")!important;background-size:cover!important;background-position:68% top!important;filter:blur(12px) brightness(.34)!important;transform:scale(1.05)!important}
+  .mt-main-banner-v21__memphis-photo{background-image:url("mt-ready-memphis-mobile-v16.jpg")!important;background-size:cover!important;background-position:68% top!important}
+  .mt-main-banner-v21__memphis-shade{background:linear-gradient(90deg,rgba(17,20,26,.92) 0%,rgba(17,20,26,.58) 43%,rgba(17,20,26,.10) 68%,rgba(17,20,26,.02) 100%),linear-gradient(0deg,rgba(17,20,26,.82) 0%,rgba(17,20,26,.24) 44%,rgba(17,20,26,.04) 100%)!important}
+  .mt-main-banner-v21__memphis-copy{left:22px!important;right:auto!important;top:17%!important;bottom:auto!important;transform:none!important;width:56%!important;max-width:56%!important}
+  .mt-main-banner-v21__kicker{font-size:10px!important;line-height:1.35!important;margin-bottom:12px!important;gap:10px!important;white-space:nowrap!important}
+  .mt-main-banner-v21__kicker:before{width:28px!important}
+  .mt-main-banner-v21__memphis-copy h2{font-size:clamp(36px,10.6vw,50px)!important;line-height:.84!important;letter-spacing:-.045em!important}
+  .mt-main-banner-v21__memphis-copy p{font-size:13px!important;line-height:1.38!important;margin:16px 0 18px!important;max-width:100%!important}
+  .mt-main-banner-v21__button{min-height:46px!important;padding:0 18px!important;font-size:11px!important}
+}
+
+/* ---------- REVIEWS ---------- */
+.mt-reviews-dark{background:#050506!important;color:#fff!important;border:0!important;display:block!important;visibility:visible!important;opacity:1!important}
+.mt-reviews-dark:before,.mt-reviews-dark:after{display:none!important}
+.mt-reviews-dark .section__header,.mt-reviews-dark .section__title,.mt-reviews-dark .review-audited{border:0!important;color:#fff!important}
+.mt-reviews-dark .review-list{display:flex!important;gap:12px!important;overflow-x:auto!important;visibility:visible!important;opacity:1!important}
+.mt-reviews-dark .review{display:block!important;flex:0 0 calc(25% - 9px)!important;width:auto!important;visibility:visible!important;opacity:1!important;transform:none!important}
+.mt-reviews-dark .review-card{display:block!important;min-height:185px!important;background:#11141a!important;border:1px solid #30343c!important;color:#fff!important;padding:20px!important}
+.mt-reviews-dark .review-heading,.mt-reviews-dark .review-body{color:#fff!important;opacity:1!important}
+.mt-reviews-dark .review-subheading{color:#c6cad0!important;opacity:1!important}
+.mt-reviews-dark .review-audited{display:flex!important;align-items:center!important;justify-content:center!important;gap:8px!important;margin-top:16px!important;opacity:1!important;visibility:visible!important}
+.mt-reviews-dark .review-audited img{display:inline-block!important;width:90px!important;height:auto!important;filter:none!important;opacity:1!important;visibility:visible!important}
+@media(max-width:700px){.mt-reviews-dark .review{flex:0 0 88%!important}}
