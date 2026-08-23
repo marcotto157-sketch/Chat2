@@ -1,17 +1,3 @@
-{% section 'slideshow' %}
+{% section 'mt-main-banner-v19' %}
 {% section 'mt-home-experience' %}
 {{ content_for_index }}
-<script>
-(function(){
-  function slowSlider(){
-    var el=document.querySelector('[data-section-type="slideshow"] .slideshow');
-    if(!el) return;
-    try{
-      var inst=(window.Flickity&&Flickity.data)?Flickity.data(el):null;
-      if(!inst&&window.jQuery){inst=jQuery(el).data('flickity');}
-      if(inst){inst.options.autoPlay=8000;if(inst.player){inst.player.stop();inst.player.play();}}
-    }catch(e){}
-  }
-  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',function(){setTimeout(slowSlider,900);});}else{setTimeout(slowSlider,900);}
-})();
-</script>

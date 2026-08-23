@@ -1,0 +1,45 @@
+<section class="mt-main-banner-v19" aria-label="Destaques da MT Sports">
+  <div class="mt-main-banner-v19__viewport" data-mt-main-banner>
+    <div class="mt-main-banner-v19__track">
+      <article class="mt-main-banner-v19__slide is-active" data-slide="0">
+        <picture>
+          <source media="(max-width:700px)" srcset="{{ 'Anderson-Porfirio-mobile.png' | file_img_url: 'master' }}">
+          <img src="{{ 'Anderson-Porfirio-pc.png' | file_img_url: 'master' }}" alt="Compre 2 e leve 3" loading="eager">
+        </picture>
+      </article>
+      <article class="mt-main-banner-v19__slide" data-slide="1">
+        <picture>
+          <source media="(max-width:700px)" srcset="{{ 'mt-ready-memphis-mobile-v16.jpg' | asset_url }}">
+          <img src="{{ 'mt-ready-memphis.jpg' | asset_url }}" alt="Pronta entrega" loading="lazy">
+        </picture>
+      </article>
+      <article class="mt-main-banner-v19__slide" data-slide="2">
+        <picture>
+          <source media="(max-width:700px)" srcset="{{ 'neymar_vertical_mesma_proporcao.png' | file_img_url: 'master' }}">
+          <img src="{{ 'ChatGPT_Image_15_de_ago._de_2026_03_41_33.png' | file_img_url: 'master' }}" alt="Camisas 2026 e 2027 já disponíveis" loading="lazy">
+        </picture>
+      </article>
+      <a class="mt-main-banner-v19__slide" data-slide="3" href="/pages/prazo-e-funcionamento-das-entregas" aria-label="Conheça nossos métodos de envio">
+        <picture>
+          <source media="(max-width:700px)" srcset="{{ 'ChatGPT_Image_15_de_ago._de_2026_21_15_02.png' | file_img_url: 'master' }}">
+          <img src="{{ 'ChatGPT_Image_15_de_ago._de_2026_21_07_59.png' | file_img_url: 'master' }}" alt="Conheça nossos métodos de envio" loading="lazy">
+        </picture>
+      </a>
+    </div>
+    <button class="mt-main-banner-v19__arrow mt-main-banner-v19__arrow--prev" type="button" aria-label="Banner anterior">‹</button>
+    <button class="mt-main-banner-v19__arrow mt-main-banner-v19__arrow--next" type="button" aria-label="Próximo banner">›</button>
+    <div class="mt-main-banner-v19__dots" role="tablist" aria-label="Escolher banner">
+      <button class="is-active" type="button" data-dot="0" aria-label="Banner 1"></button>
+      <button type="button" data-dot="1" aria-label="Banner 2"></button>
+      <button type="button" data-dot="2" aria-label="Banner 3"></button>
+      <button type="button" data-dot="3" aria-label="Banner 4"></button>
+    </div>
+  </div>
+</section>
+<style>
+.mt-main-banner-v19{background:#050506!important;padding:0!important;margin:0!important;overflow:hidden!important}.mt-main-banner-v19__viewport{position:relative;width:min(1440px,calc(100% - 48px));margin:0 auto;background:#050506;overflow:hidden;border-radius:10px;aspect-ratio:3/1}.mt-main-banner-v19__track,.mt-main-banner-v19__slide,.mt-main-banner-v19__slide picture{position:absolute;inset:0;width:100%;height:100%}.mt-main-banner-v19__slide{display:block;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .55s ease;background:#050506}.mt-main-banner-v19__slide.is-active{opacity:1;visibility:visible;pointer-events:auto;z-index:2}.mt-main-banner-v19__slide img{display:block;width:100%;height:100%;max-width:none;object-fit:cover;object-position:center;margin:0;padding:0;border:0;background:#050506}.mt-main-banner-v19__arrow{position:absolute;z-index:8;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.62);background:rgba(0,0,0,.48);color:#fff;font-size:30px;line-height:1;display:grid;place-items:center;cursor:pointer}.mt-main-banner-v19__arrow--prev{left:14px}.mt-main-banner-v19__arrow--next{right:14px}.mt-main-banner-v19__dots{position:absolute;z-index:8;bottom:13px;left:50%;transform:translateX(-50%);display:flex;gap:7px}.mt-main-banner-v19__dots button{width:26px;height:3px;padding:0;border:0;background:rgba(255,255,255,.38);cursor:pointer;transition:.2s}.mt-main-banner-v19__dots button.is-active{width:38px;background:#fff}@media(max-width:700px){.mt-main-banner-v19__viewport{width:100%;border-radius:0;aspect-ratio:750/1100}.mt-main-banner-v19__arrow{width:36px;height:36px;font-size:25px}.mt-main-banner-v19__arrow--prev{left:8px}.mt-main-banner-v19__arrow--next{right:8px}.mt-main-banner-v19__dots{bottom:9px}}
+</style>
+<script>
+(function(){var root=document.currentScript.previousElementSibling;while(root&&(!root.classList||!root.classList.contains('mt-main-banner-v19'))){root=root.previousElementSibling;}if(!root)return;var box=root.querySelector('[data-mt-main-banner]'),slides=[].slice.call(box.querySelectorAll('[data-slide]')),dots=[].slice.call(box.querySelectorAll('[data-dot]')),prev=box.querySelector('.mt-main-banner-v19__arrow--prev'),next=box.querySelector('.mt-main-banner-v19__arrow--next'),i=0,t=null,startX=0;function show(n){i=(n+slides.length)%slides.length;slides.forEach(function(s,x){s.classList.toggle('is-active',x===i)});dots.forEach(function(d,x){d.classList.toggle('is-active',x===i)});}function play(){clearInterval(t);t=setInterval(function(){show(i+1)},8000);}prev.addEventListener('click',function(){show(i-1);play()});next.addEventListener('click',function(){show(i+1);play()});dots.forEach(function(d){d.addEventListener('click',function(){show(parseInt(d.getAttribute('data-dot'),10));play()})});box.addEventListener('touchstart',function(e){startX=e.touches[0].clientX},{passive:true});box.addEventListener('touchend',function(e){var dx=e.changedTouches[0].clientX-startX;if(Math.abs(dx)>45){show(i+(dx<0?1:-1));play()}},{passive:true});box.addEventListener('mouseenter',function(){clearInterval(t)});box.addEventListener('mouseleave',play);show(0);play();})();
+</script>
+{% schema %}{"name":"Banner principal MT","settings":[],"presets":[{"name":"Banner principal MT"}]}{% endschema %}
