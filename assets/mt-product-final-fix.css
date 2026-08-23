@@ -1,0 +1,39 @@
+/* MT Sports — correção isolada da página de produto */
+body.template-product .product-form__add-button,
+body.template-product .botaoflutuante .button--primary{
+  flex:0 1 245px!important;
+  width:auto!important;
+  max-width:245px!important;
+  min-width:0!important;
+  min-height:52px!important;
+  height:52px!important;
+  padding:0 20px!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:9px!important;
+  line-height:1!important;
+  white-space:nowrap!important;
+  font-size:16px!important;
+}
+body.template-product .product-form__add-button img,
+body.template-product .botaoflutuante .button--primary img,
+body.template-product .product-form__add-button [class*="bag"],
+body.template-product .product-form__add-button [class*="sacola"],
+body.template-product .product-form__add-button .icon-sacola,
+body.template-product .product-form__add-button .buy-button-icon:not(.mt-buy-cart-icon){display:none!important}
+body.template-product .product-form__add-button:before,
+body.template-product .botaoflutuante .button--primary:before{display:none!important;content:none!important}
+body.template-product .mt-buy-cart-icon{width:20px!important;height:20px!important;margin:0!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;flex:0 0 20px!important}
+body.template-product .mt-buy-cart-icon svg{display:block!important;width:20px!important;height:20px!important}
+body.template-product .product-gallery__carousel-wrapper{position:relative!important;background:#15181e!important}
+body.template-product .product-gallery__carousel-item{background:#15181e!important}
+body.template-product .mt-gallery-arrow{position:absolute!important;top:50%!important;transform:translateY(-50%)!important;z-index:15!important;width:40px!important;height:40px!important;border:1px solid rgba(255,255,255,.55)!important;border-radius:50%!important;background:rgba(10,12,16,.78)!important;color:#fff!important;display:flex!important;align-items:center!important;justify-content:center!important;cursor:pointer!important;padding:0!important}
+body.template-product .mt-gallery-arrow--prev{left:10px!important}body.template-product .mt-gallery-arrow--next{right:10px!important}
+body.template-product .mt-gallery-arrow svg{width:19px!important;height:19px!important;display:block!important}
+@media(max-width:700px){
+ body.template-product .product-form__payment-container{align-items:center!important}
+ body.template-product .product-form__add-button{flex:0 1 225px!important;max-width:225px!important;height:50px!important;min-height:50px!important;padding:0 15px!important;font-size:15px!important}
+ body.template-product .mt-gallery-arrow{width:36px!important;height:36px!important}
+ body.template-product .mt-gallery-arrow--prev{left:7px!important}body.template-product .mt-gallery-arrow--next{right:7px!important}
+}
