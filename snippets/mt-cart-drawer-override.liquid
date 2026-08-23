@@ -1,19 +1,25 @@
 <link rel="stylesheet" href="{{ 'mt-cart-drawer.css' | asset_url }}">
+<style>
+/* quantidade PDP: sem corte */
+body.template-product .evolution-quantity-selector{width:94px!important;height:54px!important;padding:3px!important;overflow:visible!important;flex-shrink:0!important}
+body.template-product .evolution-quantity-selector__value{width:56px!important;min-width:56px!important;height:46px!important;padding:0!important}
+body.template-product .evolution-quantity-container{width:29px!important;min-width:29px!important;height:46px!important;overflow:visible!important}
+body.template-product .evolution-quantity-selector__button{width:29px!important;height:22px!important;min-height:22px!important;line-height:22px!important;overflow:visible!important}
+/* sacolinha sem depender de FontAwesome */
+body.template-product .product-form__add-button:before,body.template-product .botaoflutuante .button--primary:before{content:'🛍'!important;font-family:Arial,sans-serif!important;font-size:20px!important;line-height:1!important;margin-right:9px!important;display:inline-block!important}
+/* drawer preto */
+#mini-cart,.mini-cart,.mini-cart .justWrapper,.mini-cart .mini-cart__inner,.mini-cart .mini-cart__content,.mini-cart .mini-cart__recap,.mini-cart header.drawer__header{background:#050506!important;color:#fff!important}
+#mini-cart *{color:#fff!important;border-color:#343840!important}
+#mini-cart .quantity-selector,#mini-cart .quantity-selector__button,#mini-cart .quantity-selector__value{background:#11141a!important;color:#fff!important}
+#mini-cart .button--primary{background:#fff!important;color:#050506!important;border-color:#fff!important}
+#mini-cart .button--secondary{background:#11141a!important;color:#fff!important;border:1px solid #fff!important}
+#mini-cart svg,#mini-cart svg path{fill:currentColor!important}
+@media(max-width:450px){.mini-cart__recap{background:#050506!important}}
+</style>
 <script>
 (function(){
-  window.__mtCartManualCheckout=true;
-  function isInsideCart(el){return !!(el&&el.closest&&el.closest('#mini-cart'));}
-  function stopAutoCheckout(e){
-    var el=e.target&&e.target.closest?e.target.closest('a,button,input,form'):null;
-    if(!isInsideCart(el)) return;
-    var href=(el.getAttribute&&el.getAttribute('href'))||'';
-    var name=(el.getAttribute&&el.getAttribute('name'))||'';
-    if(/checkout/i.test(href)||name==='checkout') return; // só o clique explícito de finalizar pode sair
-  }
-  document.addEventListener('click',stopAutoCheckout,true);
-  document.addEventListener('cart:refresh',function(){
-    // mantém o cliente no drawer; checkout somente por ação explícita
-    if(location.pathname.indexOf('/checkout')===-1){window.__mtCartManualCheckout=true;}
-  });
+ function cleanHome(){document.querySelectorAll('[data-mt-auto-collection="kits-infantis"]').forEach(function(e){e.remove();});}
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',cleanHome);else cleanHome();
+ new MutationObserver(cleanHome).observe(document.documentElement,{childList:true,subtree:true});
 })();
 </script>
