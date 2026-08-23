@@ -2,6 +2,7 @@
 <link rel="stylesheet" href="{{ 'mt-final-fixes-v17.css' | asset_url }}">
 <link rel="stylesheet" href="{{ 'mt-final-fixes-v18.css' | asset_url }}">
 <link rel="stylesheet" href="{{ 'mt-final-fixes-v19.css' | asset_url }}">
+<link rel="stylesheet" href="{{ 'mt-final-fixes-v20.css' | asset_url }}">
 <style>
 body.template-product .evolution-quantity-selector{width:94px!important;height:54px!important;padding:3px!important;overflow:visible!important;flex-shrink:0!important}
 body.template-product .evolution-quantity-selector__value{width:56px!important;min-width:56px!important;height:46px!important;padding:0!important}
@@ -12,3 +13,4 @@ body.template-product .product-form__add-button:before,body.template-product .bo
 #mini-cart *{color:#fff!important;border-color:#343840!important}#mini-cart .quantity-selector,#mini-cart .quantity-selector__button,#mini-cart .quantity-selector__value{background:#11141a!important;color:#fff!important}#mini-cart .button--primary{background:#fff!important;color:#050506!important;border-color:#fff!important}#mini-cart .button--secondary{background:#11141a!important;color:#fff!important;border:1px solid #fff!important}#mini-cart svg,#mini-cart svg path{fill:currentColor!important}@media(max-width:450px){.mini-cart__recap{background:#050506!important}}
 </style>
 <script>(function(){function cleanHome(){document.querySelectorAll('[data-mt-auto-collection="kits-infantis"]').forEach(function(e){e.remove();});}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',cleanHome);else cleanHome();new MutationObserver(cleanHome).observe(document.documentElement,{childList:true,subtree:true});})();</script>
+{% render 'mt-social-float' %}
