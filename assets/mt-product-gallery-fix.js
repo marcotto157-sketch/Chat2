@@ -3,7 +3,19 @@
 function cleanButton(){
  document.querySelectorAll('body.template-product .product-form__add-button,body.template-product .botaoflutuante .button--primary').forEach(function(b){
   b.querySelectorAll('img,[class*="bag"],[class*="sacola"],.icon-sacola').forEach(function(x){if(!x.classList.contains('mt-buy-cart-icon'))x.remove()});
-  Array.prototype.slice.call(b.childNodes).forEach(function(n){if(n.nodeType===3&&/[🛍🛒]/.test(n.nodeValue||''))n.nodeValue=(n.nodeValue||'').replace(/[🛍🛒]/g,'').trim()+' '});
+  var walker=document.createTreeWalker(b,NodeFilter.SHOW_TEXT,null,false),nodes=[],n;
+  while((n=walker.nextNode()))nodes.push(n);
+  nodes.forEach(function(t){
+   if(t.parentElement&&t.parentElement.closest('.mt-buy-cart-icon'))return;
+   var original=t.nodeValue||'';
+   var cleaned=original.replace(/🛍️?/gu,'').replace(/\uFE0F/g,'');
+   if(cleaned!==original)t.nodeValue=cleaned;
+  });
+  b.querySelectorAll('span,i,strong,em').forEach(function(x){
+   if(x.closest('.mt-buy-cart-icon'))return;
+   var txt=(x.textContent||'').replace(/\s/g,'');
+   if(txt==='🛍' || txt==='🛍️')x.remove();
+  });
  });
 }
 function ensureImage(item){
@@ -36,5 +48,5 @@ function setup(g){
 function init(){cleanButton();document.querySelectorAll('body.template-product .product-gallery__carousel').forEach(setup)}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 setTimeout(init,350);setTimeout(init,1000);
-new MutationObserver(function(){cleanButton()}).observe(document.documentElement,{childList:true,subtree:true});
+new MutationObserver(function(){cleanButton()}).observe(document.documentElement,{childList:true,subtree:true,characterData:true});
 })();
