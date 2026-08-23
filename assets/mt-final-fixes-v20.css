@@ -1,60 +1,29 @@
-/* MT Sports — acabamento final V22: banner principal + Ronaldinho mobile/desktop */
-
-/* ---------- RETRÔ / RONALDINHO ---------- */
+/* MT Sports — acabamento V23 */
 .mt-retro-feature{position:relative!important;overflow:hidden!important;background:#11141a!important;isolation:isolate!important}
-.mt-retro-feature:before,.mt-retro-feature:after{display:none!important;content:none!important;background:none!important}
+.mt-retro-feature:before,.mt-retro-feature:after{display:none!important;content:none!important}
 .mt-retro-feature__photo{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;max-width:none!important;object-fit:cover!important;transform:none!important;-webkit-mask-image:none!important;mask-image:none!important;background:none!important}
-.mt-retro-feature__photo--desktop{display:block!important;z-index:0!important;object-position:center 36%!important;filter:brightness(.74) contrast(1.04) saturate(.95)!important}
+.mt-retro-feature__photo--desktop{display:block!important;z-index:0!important;object-position:center 42%!important;filter:brightness(.72) contrast(1.04) saturate(.95)!important}
 .mt-retro-feature__photo--mobile{display:none!important}
-.mt-retro-feature__shade{position:absolute!important;inset:0!important;z-index:1!important;pointer-events:none!important;background:linear-gradient(90deg,rgba(17,20,26,.96) 0%,rgba(17,20,26,.66) 40%,rgba(17,20,26,.12) 72%,rgba(17,20,26,.04) 100%)!important}
+.mt-retro-feature__shade{position:absolute!important;inset:0!important;z-index:1!important;pointer-events:none!important;background:linear-gradient(90deg,rgba(17,20,26,.96) 0%,rgba(17,20,26,.70) 38%,rgba(17,20,26,.22) 68%,rgba(17,20,26,.04) 100%)!important}
 .mt-retro-feature__content{position:relative!important;z-index:2!important}
-
 @media screen and (max-width:700px){
-  .mt-retro-feature{height:min(126vw,620px)!important;min-height:500px!important;max-height:620px!important;background-image:url("mt-ronaldinho-user-desktop.webp")!important;background-size:cover!important;background-position:72% center!important;background-repeat:no-repeat!important}
-  .mt-retro-feature__photo--desktop,.mt-retro-feature__photo--mobile{display:none!important}
-  .mt-retro-feature__shade{background:linear-gradient(90deg,rgba(17,20,26,.97) 0%,rgba(17,20,26,.76) 40%,rgba(17,20,26,.26) 66%,rgba(17,20,26,.04) 100%),linear-gradient(0deg,rgba(17,20,26,.72) 0%,rgba(17,20,26,.18) 46%,rgba(17,20,26,.04) 100%)!important}
-  .mt-retro-feature__content{width:58%!important;max-width:58%!important;height:100%!important;min-height:0!important;margin:0!important;padding:0 0 0 22px!important;display:flex!important;flex-direction:column!important;align-items:flex-start!important;justify-content:center!important;transform:translateY(-2%)!important}
-  .mt-retro-feature .mt-kicker{font-size:11px!important;line-height:1.4!important;margin-bottom:14px!important;gap:10px!important}
-  .mt-retro-feature .mt-kicker:before{width:28px!important}
-  .mt-retro-feature h2{font-size:clamp(37px,10.6vw,50px)!important;line-height:.86!important;letter-spacing:-.045em!important;margin:0 0 14px!important;max-width:100%!important}
-  .mt-retro-feature p{font-size:13px!important;line-height:1.4!important;max-width:100%!important;margin:0 0 18px!important;color:#fff!important}
-  .mt-retro-feature .mt-button{min-height:46px!important;padding:0 18px!important;font-size:10px!important}
+ .mt-retro-feature{height:min(126vw,620px)!important;min-height:500px!important;max-height:620px!important;background:#11141a!important}
+ .mt-retro-feature__photo--desktop{display:none!important}
+ .mt-retro-feature__photo--mobile{display:block!important;object-position:58% center!important;filter:brightness(.76) contrast(1.03) saturate(.96)!important}
+ .mt-retro-feature__shade{background:linear-gradient(90deg,rgba(17,20,26,.96) 0%,rgba(17,20,26,.74) 40%,rgba(17,20,26,.20) 72%,rgba(17,20,26,.04) 100%),linear-gradient(0deg,rgba(17,20,26,.80) 0%,rgba(17,20,26,.20) 56%,rgba(17,20,26,.03) 100%)!important}
+ .mt-retro-feature__content{width:55%!important;max-width:55%!important;height:100%!important;margin:0!important;padding:0 0 0 22px!important;display:flex!important;flex-direction:column!important;align-items:flex-start!important;justify-content:center!important;transform:translateY(-1%)!important}
+ .mt-retro-feature .mt-kicker{font-size:11px!important;line-height:1.4!important;margin-bottom:14px!important;gap:10px!important}.mt-retro-feature .mt-kicker:before{width:28px!important}
+ .mt-retro-feature h2{font-size:clamp(37px,10.6vw,50px)!important;line-height:.86!important;letter-spacing:-.045em!important;margin:0 0 14px!important}
+ .mt-retro-feature p{font-size:13px!important;line-height:1.4!important;margin:0 0 18px!important;color:#fff!important}.mt-retro-feature .mt-button{min-height:46px!important;padding:0 18px!important;font-size:10px!important}
 }
-
-/* ---------- BANNER PRINCIPAL ---------- */
-.mt-main-banner-v21,.mt-main-banner-v21__viewport,.mt-main-banner-v21__slide{background:#11141a!important}
-.mt-main-banner-v21__viewport{width:100%!important;max-width:none!important}
+/* Memphis: dissolve a emenda apenas no desktop */
 @media screen and (min-width:701px){
-  .mt-main-banner-v21__slide:not(.mt-main-banner-v21__slide--memphis) picture{background:#11141a!important;overflow:hidden!important}
-  .mt-main-banner-v21__slide:not(.mt-main-banner-v21__slide--memphis) picture img{width:100%!important;height:100%!important;object-fit:cover!important;object-position:center!important;transform:none!important}
-  .mt-main-banner-v21__slide:not(.mt-main-banner-v21__slide--memphis):after{display:none!important;content:none!important;box-shadow:none!important}
-  .mt-main-banner-v21__memphis-bg{background-size:cover!important;background-position:center!important}
-  .mt-main-banner-v21__memphis-photo{background-position:right center!important;background-size:contain!important}
+ .mt-main-banner-v21__slide--memphis{background:#11141a!important}
+ .mt-main-banner-v21__memphis-bg{inset:-8%!important;background-size:cover!important;background-position:center 34%!important;filter:blur(24px) brightness(.30) saturate(.72)!important;transform:scale(1.14)!important}
+ .mt-main-banner-v21__memphis-photo{inset:-1% -1% -1% 36%!important;background-position:72% center!important;background-size:cover!important;-webkit-mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.22) 7%,#000 22%,#000 100%)!important;mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.22) 7%,#000 22%,#000 100%)!important}
+ .mt-main-banner-v21__memphis-shade{background:linear-gradient(90deg,#11141a 0%,rgba(17,20,26,.98) 27%,rgba(17,20,26,.78) 43%,rgba(17,20,26,.24) 62%,rgba(17,20,26,.06) 82%,rgba(17,20,26,.02) 100%)!important}
 }
-
+/* Mobile Memphis fica como aprovado. Só corrige o pequeno corte do slide 26/27. */
 @media screen and (max-width:700px){
-  .mt-main-banner-v21__viewport{aspect-ratio:750/1100!important;background:#11141a!important}
-  .mt-main-banner-v21__slide--memphis{background:#11141a!important}
-  .mt-main-banner-v21__memphis-bg{background-image:url("mt-ready-memphis-mobile-v16.jpg")!important;background-size:cover!important;background-position:68% top!important;filter:blur(12px) brightness(.34)!important;transform:scale(1.05)!important}
-  .mt-main-banner-v21__memphis-photo{background-image:url("mt-ready-memphis-mobile-v16.jpg")!important;background-size:cover!important;background-position:68% top!important}
-  .mt-main-banner-v21__memphis-shade{background:linear-gradient(90deg,rgba(17,20,26,.92) 0%,rgba(17,20,26,.58) 43%,rgba(17,20,26,.10) 68%,rgba(17,20,26,.02) 100%),linear-gradient(0deg,rgba(17,20,26,.82) 0%,rgba(17,20,26,.24) 44%,rgba(17,20,26,.04) 100%)!important}
-  .mt-main-banner-v21__memphis-copy{left:22px!important;right:auto!important;top:17%!important;bottom:auto!important;transform:none!important;width:56%!important;max-width:56%!important}
-  .mt-main-banner-v21__kicker{font-size:10px!important;line-height:1.35!important;margin-bottom:12px!important;gap:10px!important;white-space:nowrap!important}
-  .mt-main-banner-v21__kicker:before{width:28px!important}
-  .mt-main-banner-v21__memphis-copy h2{font-size:clamp(36px,10.6vw,50px)!important;line-height:.84!important;letter-spacing:-.045em!important}
-  .mt-main-banner-v21__memphis-copy p{font-size:13px!important;line-height:1.38!important;margin:16px 0 18px!important;max-width:100%!important}
-  .mt-main-banner-v21__button{min-height:46px!important;padding:0 18px!important;font-size:11px!important}
+ .mt-main-banner-v21__slide[data-slide="2"] picture img{object-fit:cover!important;object-position:center 48%!important;transform:scale(.985)!important;background:#11141a!important}
 }
-
-/* ---------- REVIEWS ---------- */
-.mt-reviews-dark{background:#050506!important;color:#fff!important;border:0!important;display:block!important;visibility:visible!important;opacity:1!important}
-.mt-reviews-dark:before,.mt-reviews-dark:after{display:none!important}
-.mt-reviews-dark .section__header,.mt-reviews-dark .section__title,.mt-reviews-dark .review-audited{border:0!important;color:#fff!important}
-.mt-reviews-dark .review-list{display:flex!important;gap:12px!important;overflow-x:auto!important;visibility:visible!important;opacity:1!important}
-.mt-reviews-dark .review{display:block!important;flex:0 0 calc(25% - 9px)!important;width:auto!important;visibility:visible!important;opacity:1!important;transform:none!important}
-.mt-reviews-dark .review-card{display:block!important;min-height:185px!important;background:#11141a!important;border:1px solid #30343c!important;color:#fff!important;padding:20px!important}
-.mt-reviews-dark .review-heading,.mt-reviews-dark .review-body{color:#fff!important;opacity:1!important}
-.mt-reviews-dark .review-subheading{color:#c6cad0!important;opacity:1!important}
-.mt-reviews-dark .review-audited{display:flex!important;align-items:center!important;justify-content:center!important;gap:8px!important;margin-top:16px!important;opacity:1!important;visibility:visible!important}
-.mt-reviews-dark .review-audited img{display:inline-block!important;width:90px!important;height:auto!important;filter:none!important;opacity:1!important;visibility:visible!important}
-@media(max-width:700px){.mt-reviews-dark .review{flex:0 0 88%!important}}
