@@ -1,4 +1,4 @@
-/* MT Sports — acabamento V26: full-bleed desktop + retrô sem corte de rosto */
+/* MT Sports — acabamento V27: full-bleed desktop + retrô Ronaldo sem corte */
 
 /* Banner principal desktop: sai do container do tema e ocupa a largura real da janela. */
 @media screen and (min-width:701px){
@@ -59,9 +59,11 @@
 .mt-retro-feature__photo--desktop{
   display:block!important;
   z-index:0!important;
-  content:url('https://cdn.shopify.com/s/files/1/0748/8415/3575/files/mt-retro-ronaldinho-natural-desktop.webp?v=1787461164')!important;
-  object-position:center top!important;
-  filter:brightness(.66) contrast(1.04) saturate(.92)!important;
+  content:url('/cdn/shop/t/63/assets/mt-ronaldo-retro.jpg')!important;
+  object-fit:contain!important;
+  object-position:center center!important;
+  transform:none!important;
+  filter:brightness(.68) contrast(1.04) saturate(.94)!important;
 }
 .mt-retro-feature__photo--mobile{display:none!important}
 .mt-retro-feature__shade{
