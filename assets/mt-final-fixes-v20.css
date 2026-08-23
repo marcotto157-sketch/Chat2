@@ -1,6 +1,6 @@
-/* MT Sports — acabamento V25: full-bleed desktop + retrô sem corte de rosto */
+/* MT Sports — acabamento V26: full-bleed desktop + retrô sem corte de rosto */
 
-/* Banner principal desktop: ocupa a largura real da janela e elimina qualquer faixa lateral do container do tema. */
+/* Banner principal desktop: sai do container do tema e ocupa a largura real da janela. */
 @media screen and (min-width:701px){
   .mt-main-banner-v21{
     position:relative!important;
@@ -36,7 +36,7 @@
   .mt-main-banner-v21__memphis-shade{background:linear-gradient(90deg,#11141a 0%,#11141a 24%,rgba(17,20,26,.90) 38%,rgba(17,20,26,.43) 53%,rgba(17,20,26,.09) 73%,rgba(17,20,26,0) 100%)!important}
 }
 
-/* Boas Lembranças: uma única foto real preenchendo o banner; sem camada de atleta sobre fundo separado. */
+/* Boas Lembranças: foto real única preenchendo o banner, sem recorte de jogador sobre outro fundo. */
 .mt-retro-feature{
   position:relative!important;
   overflow:hidden!important;
@@ -59,8 +59,8 @@
 .mt-retro-feature__photo--desktop{
   display:block!important;
   z-index:0!important;
-  content:url('https://cdn.shopify.com/s/files/1/0748/8415/3575/files/ronaldinho-gaucc81cho-barcelona-20071209-006_2.webp')!important;
-  object-position:center 10%!important;
+  content:url('https://cdn.shopify.com/s/files/1/0748/8415/3575/files/mt-retro-ronaldinho-natural-desktop.webp?v=1787461164')!important;
+  object-position:center top!important;
   filter:brightness(.66) contrast(1.04) saturate(.92)!important;
 }
 .mt-retro-feature__photo--mobile{display:none!important}
