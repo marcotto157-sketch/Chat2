@@ -1,0 +1,29 @@
+<link rel="stylesheet" href="{{ 'mt-cart-drawer.css' | asset_url }}">
+<script>
+(function(){
+  function forceDrawer(){
+    document.querySelectorAll('form[action*="/cart/add"]').forEach(function(form){
+      if(form.dataset.mtDrawerBound) return;
+      form.dataset.mtDrawerBound='1';
+      form.addEventListener('submit',function(e){
+        var submitter=e.submitter || document.activeElement;
+        if(submitter && (submitter.name==='checkout' || /comprar agora|buy now/i.test(submitter.textContent||submitter.value||''))){
+          e.preventDefault();
+          var data=new FormData(form);
+          fetch('/cart/add.js',{method:'POST',body:data,headers:{'Accept':'application/json'}})
+            .then(function(r){if(!r.ok) throw new Error(); return r.json();})
+            .then(function(){return fetch('/cart.js').then(function(r){return r.json();});})
+            .then(function(cart){
+              document.querySelectorAll('.header__cart-count').forEach(function(el){el.textContent=cart.item_count;});
+              var toggle=document.querySelector('[data-action="toggle-mini-cart"]');
+              if(toggle){ toggle.click(); }
+              else { window.location.href='/cart'; }
+            }).catch(function(){ window.location.href='/cart'; });
+        }
+      },true);
+    });
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',forceDrawer); else forceDrawer();
+  new MutationObserver(forceDrawer).observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script>
