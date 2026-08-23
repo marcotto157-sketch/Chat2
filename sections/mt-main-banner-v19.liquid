@@ -47,10 +47,10 @@
 </section>
 
 <style>
-.mt-main-banner-v21{background:#050506;padding:0;margin:0;color:#fff}
-.mt-main-banner-v21__viewport{position:relative;width:min(1800px,100%);margin:0 auto;aspect-ratio:3/1;overflow:hidden;background:#050506}
+.mt-main-banner-v21{background:#11141a;padding:0;margin:0;color:#fff}
+.mt-main-banner-v21__viewport{position:relative;width:min(1800px,100%);margin:0 auto;aspect-ratio:3/1;overflow:hidden;background:#11141a}
 .mt-main-banner-v21__track,.mt-main-banner-v21__slide{position:absolute;inset:0}
-.mt-main-banner-v21__slide{display:block;opacity:0;visibility:hidden;transition:opacity .55s ease;background:#050506;pointer-events:none}
+.mt-main-banner-v21__slide{display:block;opacity:0;visibility:hidden;transition:opacity .55s ease;background:#11141a;pointer-events:none}
 .mt-main-banner-v21__slide.is-active{opacity:1;visibility:visible;pointer-events:auto;z-index:2}
 .mt-main-banner-v21__slide picture,.mt-main-banner-v21__slide picture img{display:block;width:100%;height:100%}
 .mt-main-banner-v21__slide picture img{object-fit:cover;object-position:center}
@@ -59,29 +59,36 @@
 .mt-main-banner-v21__dots{position:absolute;z-index:10;left:50%;bottom:14px;transform:translateX(-50%);display:flex;gap:9px}
 .mt-main-banner-v21__dots button{width:34px;height:3px;padding:0;border:0;background:rgba(255,255,255,.38);cursor:pointer}.mt-main-banner-v21__dots button.is-active{background:#fff}
 
-.mt-main-banner-v21__slide--memphis{overflow:hidden;background:#050506}
+.mt-main-banner-v21__slide--memphis{overflow:hidden;background:#11141a}
 .mt-main-banner-v21__memphis-bg{position:absolute;inset:-5%;background:url("{{ 'mt-ready-memphis.jpg' | asset_url }}") center/cover no-repeat;filter:blur(18px) brightness(.34) saturate(.75);transform:scale(1.08)}
 .mt-main-banner-v21__memphis-photo{position:absolute;inset:0;background:url("{{ 'mt-ready-memphis.jpg' | asset_url }}") right center/contain no-repeat;z-index:1}
-.mt-main-banner-v21__memphis-shade{position:absolute;inset:0;z-index:2;background:linear-gradient(90deg,#050506 0%,rgba(5,5,6,.97) 24%,rgba(5,5,6,.70) 45%,rgba(5,5,6,.16) 68%,rgba(5,5,6,.12) 100%)}
+.mt-main-banner-v21__memphis-shade{position:absolute;inset:0;z-index:2;background:linear-gradient(90deg,#11141a 0%,rgba(17,20,26,.97) 24%,rgba(17,20,26,.70) 45%,rgba(17,20,26,.16) 68%,rgba(17,20,26,.12) 100%)}
 .mt-main-banner-v21__memphis-copy{position:absolute;z-index:3;left:clamp(34px,6vw,110px);top:50%;transform:translateY(-50%);width:min(44%,650px)}
 .mt-main-banner-v21__kicker{display:flex;align-items:center;gap:16px;font-weight:800;letter-spacing:.22em;font-size:clamp(12px,1.05vw,17px);margin-bottom:22px}.mt-main-banner-v21__kicker:before{content:"";width:44px;height:3px;background:#c8102e;display:block}
 .mt-main-banner-v21__memphis-copy h2{margin:0;font-size:clamp(50px,6vw,102px);line-height:.82;letter-spacing:-.055em;font-weight:900;color:#fff}.mt-main-banner-v21__memphis-copy h2 span{color:transparent;-webkit-text-stroke:1.35px rgba(255,255,255,.88);text-stroke:1.35px rgba(255,255,255,.88)}
 .mt-main-banner-v21__memphis-copy p{font-size:clamp(15px,1.35vw,22px);line-height:1.45;margin:24px 0 26px;max-width:580px;color:#fff}
 .mt-main-banner-v21__button{display:inline-flex;align-items:center;justify-content:center;min-height:56px;padding:0 30px;background:#fff;color:#050506!important;text-decoration:none!important;font-size:14px;font-weight:900;letter-spacing:.08em}
 
+@media(min-width:701px){
+ .mt-main-banner-v21__slide:not(.mt-main-banner-v21__slide--memphis) picture{overflow:hidden;background:#11141a}
+ .mt-main-banner-v21__slide:not(.mt-main-banner-v21__slide--memphis) picture img{transform:scale(1.03);transform-origin:center center}
+ .mt-main-banner-v21__slide:not(.mt-main-banner-v21__slide--memphis):after{content:"";position:absolute;inset:0;z-index:3;pointer-events:none;box-shadow:inset 0 0 30px 5px rgba(17,20,26,.42)}
+}
+
 @media(max-width:700px){
- .mt-main-banner-v21__viewport{width:100%;aspect-ratio:750/1100}
+ .mt-main-banner-v21__viewport{width:100%;aspect-ratio:750/1100;background:#11141a}
+ .mt-main-banner-v21__slide{background:#11141a}
  .mt-main-banner-v21__slide picture img{object-fit:cover}
  .mt-main-banner-v21__arrow{width:38px;height:48px;font-size:32px;opacity:.9}.mt-main-banner-v21__arrow--prev{left:8px}.mt-main-banner-v21__arrow--next{right:8px}
  .mt-main-banner-v21__dots{bottom:12px}.mt-main-banner-v21__dots button{width:27px}
- .mt-main-banner-v21__memphis-bg{background-image:url("{{ 'mt-ready-memphis-mobile-v16.jpg' | asset_url }}");filter:blur(12px) brightness(.32)}
- .mt-main-banner-v21__memphis-photo{background-image:url("{{ 'mt-ready-memphis-mobile-v16.jpg' | asset_url }}");background-size:cover;background-position:center top}
- .mt-main-banner-v21__memphis-shade{background:linear-gradient(0deg,#050506 0%,rgba(5,5,6,.86) 31%,rgba(5,5,6,.18) 68%,rgba(5,5,6,.14) 100%)}
- .mt-main-banner-v21__memphis-copy{left:24px;right:24px;bottom:140px;top:auto;transform:none;width:auto}
+ .mt-main-banner-v21__memphis-bg{background-image:url("{{ 'mt-ready-memphis-mobile-v16.jpg' | asset_url }}");background-position:60% top;filter:blur(12px) brightness(.32)}
+ .mt-main-banner-v21__memphis-photo{background-image:url("{{ 'mt-ready-memphis-mobile-v16.jpg' | asset_url }}");background-size:cover;background-position:62% top}
+ .mt-main-banner-v21__memphis-shade{background:linear-gradient(0deg,#11141a 0%,rgba(17,20,26,.80) 24%,rgba(17,20,26,.18) 62%,rgba(17,20,26,.10) 100%),linear-gradient(90deg,rgba(17,20,26,.70) 0%,rgba(17,20,26,.30) 55%,rgba(17,20,26,.02) 100%)}
+ .mt-main-banner-v21__memphis-copy{left:24px;right:24px;top:24%;bottom:auto;transform:none;width:auto;max-width:82%}
  .mt-main-banner-v21__kicker{font-size:12px;margin-bottom:14px;gap:12px}.mt-main-banner-v21__kicker:before{width:32px}
- .mt-main-banner-v21__memphis-copy h2{font-size:clamp(48px,14vw,78px)}
- .mt-main-banner-v21__memphis-copy p{font-size:16px;margin:18px 0 20px;max-width:360px}
- .mt-main-banner-v21__button{min-height:52px;padding:0 24px}
+ .mt-main-banner-v21__memphis-copy h2{font-size:clamp(43px,12vw,64px);line-height:.84}
+ .mt-main-banner-v21__memphis-copy p{font-size:15px;line-height:1.4;margin:17px 0 19px;max-width:88%}
+ .mt-main-banner-v21__button{min-height:50px;padding:0 22px}
 }
 </style>
 
