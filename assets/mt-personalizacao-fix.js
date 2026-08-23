@@ -1,213 +1,33 @@
-/* MT Sports - Personalizacao + preco/variante + acabamento dos cards */
-(function () {
-  'use strict';
-
-  var scriptSrc = (document.currentScript && document.currentScript.src) || '';
-
-  function normalizeText(value) {
-    return (value || '').toString().normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim().toLowerCase();
-  }
-
-  function assetUrl(filename) {
-    if (!scriptSrc) return '';
-    return scriptSrc.replace(/mt-personalizacao-fix\.js(?:\?.*)?$/i, filename);
-  }
-
-  function injectVisualFixes() {
-    if (document.getElementById('mt-v29-fixes')) return;
-    var style = document.createElement('style');
-    style.id = 'mt-v29-fixes';
-    style.textContent = [
-      'body.template-product .product-form__add-button:before, body.template-product .botaoflutuante .button--primary:before{content:""!important;display:inline-block!important;width:20px!important;height:20px!important;margin-right:9px!important;vertical-align:-4px!important;background-repeat:no-repeat!important;background-position:center!important;background-size:20px 20px!important;background-image:url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'%23090a0c\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'%3E%3Ccircle cx=\'9\' cy=\'20\' r=\'1\'/%3E%3Ccircle cx=\'19\' cy=\'20\' r=\'1\'/%3E%3Cpath d=\'M3 4h2l2.4 10.4a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.6L21 8H6\'/%3E%3C/svg%3E")!important}',
-      '.product-item__secondary-image{display:none!important;opacity:0!important;visibility:hidden!important;pointer-events:none!important}',
-      '.product-item__image-wrapper .product-item__primary-image,.product-item__image-wrapper img:first-of-type{display:block!important;opacity:1!important;visibility:visible!important;transform:none!important}',
-      '@media screen and (min-width:701px){.mt-retro-feature{aspect-ratio:3/1!important;height:auto!important;min-height:0!important;max-height:none!important}.mt-retro-feature__photo--desktop{display:block!important;width:100%!important;height:100%!important;object-fit:cover!important;object-position:center center!important;filter:none!important;transform:none!important}.mt-retro-feature__photo--mobile{display:none!important}}'
-    ].join('\n');
-    document.head.appendChild(style);
-  }
-
-  function setRetroDesktopArt() {
-    var img = document.querySelector('.mt-retro-feature__photo--desktop');
-    var url = assetUrl('mt-boas-lembrancas-desktop-1800x600.jpg');
-    if (!img || !url) return;
-    img.src = url;
-    img.style.setProperty('content', 'normal', 'important');
-    img.style.setProperty('object-fit', 'cover', 'important');
-    img.style.setProperty('object-position', 'center center', 'important');
-    img.style.setProperty('filter', 'none', 'important');
-    img.style.setProperty('transform', 'none', 'important');
-  }
-
-  function personalizationGroup(root) {
-    return Array.from((root || document).querySelectorAll('.product-form__option[data-option-position]')).find(function (group) {
-      var label = group.querySelector('.product-form__option-name');
-      return normalizeText((label ? label.textContent : '') + ' ' + group.textContent).indexOf('personalizar') !== -1;
-    }) || null;
-  }
-
-  function isPersonalizeSelected(group) {
-    if (!group) return false;
-    var selected = group.querySelector('input:checked');
-    if (selected) return normalizeText(selected.value).indexOf('personalizar') !== -1;
-    var select = group.querySelector('select');
-    return !!(select && normalizeText(select.value).indexOf('personalizar') !== -1);
-  }
-
-  function setPersonalizationVisible(visible, root) {
-    var scope = root || document;
-    var box = scope.querySelector('.line-item-property__field') || document.querySelector('.line-item-property__field');
-    if (!box) return;
-    box.classList.add('mt-personalizacao-box');
-    box.classList.toggle('is-visible', !!visible);
-    box.setAttribute('aria-hidden', visible ? 'false' : 'true');
-    box.querySelectorAll('input, select, textarea').forEach(function (el) { el.disabled = !visible; });
-    if (!visible) {
-      var nameInput = box.querySelector('[name="properties[Nome]"]');
-      var numberInput = box.querySelector('[name="properties[Número]"]');
-      if (nameInput) nameInput.value = '';
-      if (numberInput) numberInput.value = '';
-    }
-  }
-
-  function relabel(group) {
-    if (!group) return;
-    var label = group.querySelector('.product-form__option-name');
-    if (label && normalizeText(label.textContent).indexOf('personalizar') === -1) label.textContent = 'Personalizar:';
-    group.querySelectorAll('label').forEach(function (labelEl) {
-      var input = document.getElementById(labelEl.getAttribute('for'));
-      if (!input) return;
-      var v = normalizeText(input.value);
-      if (v === 'nao') labelEl.textContent = 'Não';
-      if (v.indexOf('personalizar') !== -1) labelEl.textContent = 'Personalizar';
-    });
-  }
-
-  function getProductRoot(node) {
-    return (node && node.closest && (node.closest('.product-block-list__item--info') || node.closest('[data-section-type="product"]') || node.closest('.product-form'))) || document;
-  }
-
-  function getProductJson(root) {
-    var candidates = [];
-    if (root && root.querySelectorAll) candidates = Array.from(root.querySelectorAll('script[data-product-json]'));
-    if (!candidates.length) candidates = Array.from(document.querySelectorAll('script[data-product-json]'));
-    for (var i = 0; i < candidates.length; i++) {
-      try {
-        var data = JSON.parse(candidates[i].textContent || '{}');
-        if (data && data.product && data.product.variants) return data.product;
-      } catch (e) {}
-    }
-    return null;
-  }
-
-  function selectedOptions(root) {
-    var values = {};
-    var groups = Array.from((root || document).querySelectorAll('.product-form__option[data-option-position]'));
-    if (!groups.length && root !== document) groups = Array.from(document.querySelectorAll('.product-form__option[data-option-position]'));
-    groups.forEach(function (group) {
-      var pos = parseInt(group.getAttribute('data-option-position'), 10);
-      if (!pos) return;
-      var checked = group.querySelector('input:checked');
-      var select = group.querySelector('select');
-      values[pos] = checked ? checked.value : (select ? select.value : null);
-    });
-    return values;
-  }
-
-  function findVariant(product, options) {
-    if (!product || !product.variants) return null;
-    return product.variants.find(function (variant) {
-      return Object.keys(options).every(function (key) {
-        var value = options[key];
-        if (value == null || value === '') return true;
-        return variant['option' + key] === value;
-      });
-    }) || null;
-  }
-
-  function formatBRL(cents) {
-    var value = Number(cents || 0) / 100;
-    try { return value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }); }
-    catch (e) { return 'R$ ' + value.toFixed(2).replace('.', ','); }
-  }
-
-  function syncVariantAndPrice(origin) {
-    var root = getProductRoot(origin);
-    var product = getProductJson(root);
-    if (!product) return;
-    var options = selectedOptions(root);
-    var variant = findVariant(product, options);
-    if (!variant) return;
-
-    var idControls = Array.from(document.querySelectorAll('select[name="id"], input[name="id"]'));
-    idControls.forEach(function (el) {
-      if (String(el.value) !== String(variant.id)) el.value = variant.id;
-    });
-
-    var priceTargets = document.querySelectorAll('#evolution-price-list .product-price .price-promotional-wrap strong, #evolution-price-list .product-price .price-promotional strong, .product-block-list__item--info .product-price .price-promotional-wrap strong');
-    priceTargets.forEach(function (el) { el.textContent = formatBRL(variant.price); });
-
-    var compareTargets = document.querySelectorAll('#evolution-price-list .price--compare, #evolution-price-list .product-price--compare, #evolution-price-list s');
-    compareTargets.forEach(function (el) {
-      if (variant.compare_at_price && Number(variant.compare_at_price) > Number(variant.price)) {
-        el.textContent = formatBRL(variant.compare_at_price);
-        el.style.display = '';
-      } else {
-        el.style.display = 'none';
-      }
-    });
-
-    var addButton = document.querySelector('.product-form__add-button');
-    if (addButton) {
-      addButton.disabled = variant.available === false;
-      addButton.setAttribute('data-variant-id', variant.id);
-    }
-
-    try { if (typeof window.parcelamento === 'function') window.parcelamento(); } catch (e) {}
-  }
-
-  function sync(origin) {
-    var root = getProductRoot(origin);
-    var group = personalizationGroup(root);
-    if (group) {
-      relabel(group);
-      setPersonalizationVisible(isPersonalizeSelected(group), root);
-    } else {
-      setPersonalizationVisible(false, root);
-    }
-    syncVariantAndPrice(origin);
-  }
-
-  function runAll(origin) {
-    injectVisualFixes();
-    setRetroDesktopArt();
-    sync(origin || document.body);
-  }
-
-  document.addEventListener('change', function (e) {
-    if (e.target && e.target.closest && e.target.closest('.product-form__option')) {
-      runAll(e.target);
-      setTimeout(function () { sync(e.target); }, 60);
-      setTimeout(function () { sync(e.target); }, 220);
-    }
-  });
-
-  document.addEventListener('click', function (e) {
-    var label = e.target && e.target.closest ? e.target.closest('.block-swatch__item, .variant-swatch__item, label') : null;
-    if (label && label.closest('.product-form__option')) {
-      setTimeout(function () { sync(label); }, 0);
-      setTimeout(function () { sync(label); }, 80);
-      setTimeout(function () { sync(label); }, 240);
-    }
-  });
-
-  document.addEventListener('DOMContentLoaded', function () {
-    runAll(document.body);
-    setTimeout(function () { runAll(document.body); }, 250);
-    setTimeout(function () { runAll(document.body); }, 900);
-  });
-
-  if (document.readyState !== 'loading') {
-    runAll(document.body);
-    setTimeout(function () { runAll(document.body); }, 250);
-  }
+/* MT Sports - hotfix produto/colecoes v30 */
+(function(){
+'use strict';
+var STYLE_ID='mt-v30-hotfix';
+function norm(v){try{return (v||'').toString().normalize('NFD').replace(/[\u0300-\u036f]/g,'').trim().toLowerCase()}catch(e){return (v||'').toString().trim().toLowerCase()}}
+function addStyle(){if(document.getElementById(STYLE_ID))return;var s=document.createElement('style');s.id=STYLE_ID;s.textContent='\
+#aparecer.personalizacao,.personalizacao.mt-personalizacao-box,.line-item-property__field.mt-personalizacao-box{display:none!important;visibility:hidden!important;opacity:0!important;max-height:0!important;overflow:hidden!important;pointer-events:none!important;margin-top:0!important;}\
+#aparecer.personalizacao.is-visible,.personalizacao.mt-personalizacao-box.is-visible,.line-item-property__field.mt-personalizacao-box.is-visible{display:block!important;visibility:visible!important;opacity:1!important;max-height:600px!important;overflow:visible!important;pointer-events:auto!important;margin-top:18px!important;}\
+.product-item__secondary-image{display:none!important;opacity:0!important;visibility:hidden!important;pointer-events:none!important;}\
+.product-item__image-wrapper--with-secondary .product-item__primary-image,.product-item__image-wrapper .product-item__primary-image{display:block!important;opacity:1!important;visibility:visible!important;transform:none!important;}\
+.mt-buy-cart-icon{width:20px!important;height:20px!important;display:inline-block!important;vertical-align:-4px!important;margin-right:9px!important;flex:0 0 20px!important;}\
+body.template-product .product-form__add-button:before,body.template-product .botaoflutuante .button--primary:before{display:none!important;content:none!important;}';document.head.appendChild(s)}
+function productScope(node){return node&&node.closest?(node.closest('.product-block-list__item--info')||node.closest('[data-section-type="product"]')||node.closest('.product-form')||document):document}
+function personalGroups(root){var scope=root&&root.querySelectorAll?root:document;var groups=[].slice.call(scope.querySelectorAll('.product-form__option'));if(!groups.length&&scope!==document)groups=[].slice.call(document.querySelectorAll('.product-form__option'));return groups.filter(function(g){if(g.querySelector('.detect_variant'))return true;var n=g.querySelector('.product-form__option-name');return norm((n?n.textContent:'')+' '+g.textContent).indexOf('personalizar')>-1})}
+function selectedPersonal(group){if(!group)return false;var checked=group.querySelector('.detect_variant:checked,input:checked');if(checked)return norm(checked.value).indexOf('personalizar')>-1;var sel=group.querySelector('select');return !!(sel&&norm(sel.value).indexOf('personalizar')>-1)}
+function boxes(root){var arr=[];function pushAll(scope){if(!scope||!scope.querySelectorAll)return;['#aparecer.personalizacao','#aparecer','.personalizacao','.line-item-property__field'].forEach(function(q){[].slice.call(scope.querySelectorAll(q)).forEach(function(el){if(arr.indexOf(el)<0)arr.push(el)})})}pushAll(root);if(!arr.length&&root!==document)pushAll(document);return arr}
+function togglePersonal(root,on){boxes(root).forEach(function(box){box.classList.add('mt-personalizacao-box');box.classList.toggle('is-visible',!!on);box.setAttribute('aria-hidden',on?'false':'true');box.style.setProperty('display',on?'block':'none','important');box.style.setProperty('visibility',on?'visible':'hidden','important');box.style.setProperty('opacity',on?'1':'0','important');box.style.setProperty('max-height',on?'600px':'0','important');box.style.setProperty('overflow',on?'visible':'hidden','important');box.style.setProperty('pointer-events',on?'auto':'none','important');box.querySelectorAll('input,select,textarea').forEach(function(el){el.disabled=!on});if(!on){box.querySelectorAll('input,textarea').forEach(function(el){el.value=''})}})}
+function updateSelectedLabel(group){if(!group)return;var checked=group.querySelector('input:checked');var sel=group.querySelector('select');var val=checked?checked.value:(sel?sel.value:'');var out=group.querySelector('.product-form__selected-value,.detect_selected');if(out){var inner=out.querySelector('.product-form__selected-value');(inner||out).textContent=val||''}}
+function getProduct(root){var scripts=[];if(root&&root.querySelectorAll)scripts=[].slice.call(root.querySelectorAll('script[data-product-json]'));if(!scripts.length)scripts=[].slice.call(document.querySelectorAll('script[data-product-json]'));for(var i=0;i<scripts.length;i++){try{var d=JSON.parse(scripts[i].textContent||'{}');if(d&&d.product&&d.product.variants)return d.product;if(d&&d.variants)return d}catch(e){}}return null}
+function options(root){var vals={};var gs=[].slice.call((root&&root.querySelectorAll?root:document).querySelectorAll('.product-form__option[data-option-position]'));if(!gs.length&&root!==document)gs=[].slice.call(document.querySelectorAll('.product-form__option[data-option-position]'));gs.forEach(function(g){var p=parseInt(g.getAttribute('data-option-position'),10);if(!p)return;var c=g.querySelector('input:checked');var s=g.querySelector('select');vals[p]=c?c.value:(s?s.value:null)});return vals}
+function findVariant(product,opts){if(!product||!product.variants)return null;return product.variants.find(function(v){return Object.keys(opts).every(function(k){var wanted=opts[k];if(wanted==null||wanted==='')return true;var got=v['option'+k];if(got==null&&v.options)got=v.options[parseInt(k,10)-1];return String(got)===String(wanted)})})||null}
+function money(cents){var n=Number(cents||0);if(n<1000&&String(cents).indexOf('.')>-1)n=n*100;try{return (n/100).toLocaleString('pt-BR',{style:'currency',currency:'BRL'}).replace(/\u00a0/g,' ')}catch(e){return 'R$ '+(n/100).toFixed(2).replace('.',',')}}
+function priceTargets(root){var scope=root&&root.querySelectorAll?root:document;var qs=['#evolution-price-list .price-promotional-wrap strong','#evolution-price-list .price-promotional strong','#evolution-price-list .price--highlight','.product-price .price-promotional-wrap strong','.product-price .price-promotional strong'];var out=[];qs.forEach(function(q){[].slice.call(scope.querySelectorAll(q)).forEach(function(el){if(out.indexOf(el)<0)out.push(el)})});if(!out.length&&scope!==document)qs.forEach(function(q){[].slice.call(document.querySelectorAll(q)).forEach(function(el){if(out.indexOf(el)<0)out.push(el)})});return out}
+function syncVariant(origin){var root=productScope(origin);var p=getProduct(root);if(!p)return null;var v=findVariant(p,options(root));if(!v)return null;var form=(origin&&origin.closest&&origin.closest('form[action*="/cart/add"],.product-form'))||root.querySelector&&root.querySelector('form[action*="/cart/add"],.product-form');var controls=form&&form.querySelectorAll?form.querySelectorAll('input[name="id"],select[name="id"]'):document.querySelectorAll('input[name="id"],select[name="id"]');[].slice.call(controls||[]).forEach(function(el){el.value=String(v.id)});priceTargets(root).forEach(function(el){el.textContent=money(v.price)});var add=(form&&form.querySelector&&form.querySelector('.product-form__add-button'))||document.querySelector('.product-form__add-button');if(add){add.disabled=v.available===false;add.setAttribute('data-variant-id',v.id)}try{if(typeof window.parcelamento==='function')window.parcelamento()}catch(e){}return v}
+function sync(origin){var root=productScope(origin);var gs=personalGroups(root);var on=false;gs.forEach(function(g){updateSelectedLabel(g);if(selectedPersonal(g))on=true});togglePersonal(root,on);syncVariant(origin)}
+function lockCards(){document.querySelectorAll('.product-item__image-wrapper').forEach(function(w){w.classList.remove('product-item__image-wrapper--with-secondary');var secondary=w.querySelectorAll('.product-item__secondary-image');secondary.forEach(function(img){img.style.setProperty('display','none','important');img.style.setProperty('opacity','0','important');img.style.setProperty('visibility','hidden','important')});var primary=w.querySelector('.product-item__primary-image');if(primary){primary.style.setProperty('display','block','important');primary.style.setProperty('opacity','1','important');primary.style.setProperty('visibility','visible','important');primary.style.setProperty('transform','none','important')}})}
+function cartIcon(){document.querySelectorAll('body.template-product .product-form__add-button,body.template-product .botaoflutuante .button--primary').forEach(function(btn){if(btn.querySelector('.mt-buy-cart-icon'))return;var span=document.createElement('span');span.className='mt-buy-cart-icon';span.setAttribute('aria-hidden','true');span.innerHTML='<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1"></circle><circle cx="19" cy="20" r="1"></circle><path d="M3 4h2l2.4 10.4a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.6L21 8H6"></path></svg>';btn.insertBefore(span,btn.firstChild)})}
+function run(origin){addStyle();lockCards();cartIcon();sync(origin||document.body)}
+document.addEventListener('change',function(e){if(e.target&&e.target.closest&&e.target.closest('.product-form__option')){run(e.target);setTimeout(function(){sync(e.target)},50);setTimeout(function(){sync(e.target)},180);setTimeout(function(){sync(e.target)},450)}});
+document.addEventListener('click',function(e){var t=e.target&&e.target.closest?e.target.closest('.product-form__option label,.block-swatch__item,.variant-swatch__item'):null;if(t){setTimeout(function(){run(t)},0);setTimeout(function(){sync(t)},80);setTimeout(function(){sync(t)},260)}});
+function init(){run(document.body);setTimeout(function(){run(document.body)},250);setTimeout(function(){run(document.body)},900);var mo=new MutationObserver(function(){lockCards();cartIcon()});mo.observe(document.body,{childList:true,subtree:true})}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();
