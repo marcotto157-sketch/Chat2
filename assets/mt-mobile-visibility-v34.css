@@ -1,4 +1,4 @@
-/* MT Sports V36 — ajuste mínimo e responsivo */
+/* MT Sports — ajustes preservados */
 @media screen and (max-width:700px){
   html body .mt-home .mt-retro-feature__photo--mobile{
     filter:brightness(.94) contrast(1.02) saturate(1)!important;
@@ -8,7 +8,7 @@
   }
 }
 
-/* Premier League: título principal maior e visível, mantendo FUTEBOL INGLÊS como etiqueta */
+/* Premier League */
 html body .mt-home .mt-premier-section .mt-heading h2{
   color:#fff!important;
   font-size:clamp(38px,4vw,52px)!important;
@@ -27,59 +27,28 @@ html body .mt-home .mt-premier-section .mt-heading h2{
   }
 }
 
-/* V42 — Ronaldinho desktop: uma única imagem contínua, sem cortes laterais. Mobile intocado. */
+/* Desktop Ronaldinho — volta à composição original e só suaviza as bordas laterais */
 @media screen and (min-width:701px){
   html body .mt-home .mt-retro-feature{
-    position:relative!important;
-    min-height:620px!important;
-    overflow:hidden!important;
-    isolation:isolate!important;
     background-color:#11141a!important;
-    background-image:url("mt-ronaldinho-retro-v6.jpg")!important;
-    background-size:cover!important;
-    background-position:center 34%!important;
-    background-repeat:no-repeat!important;
+    background-image:none!important;
+    overflow:hidden!important;
   }
-
   html body .mt-home .mt-retro-feature:before,
   html body .mt-home .mt-retro-feature:after{
-    display:none!important;
     content:none!important;
-    background:none!important;
-  }
-
-  html body .mt-home .mt-retro-feature__photo--desktop{
     display:none!important;
   }
-
-  html body .mt-home .mt-retro-feature__shade{
-    position:absolute!important;
-    inset:0!important;
-    z-index:1!important;
-    background:linear-gradient(90deg,rgba(5,6,8,.96) 0%,rgba(5,6,8,.88) 26%,rgba(5,6,8,.62) 42%,rgba(5,6,8,.24) 58%,rgba(5,6,8,.05) 72%,rgba(5,6,8,0) 82%),linear-gradient(0deg,rgba(5,6,8,.50) 0%,rgba(5,6,8,.08) 42%,rgba(5,6,8,0) 70%)!important;
-    pointer-events:none!important;
+  html body .mt-home .mt-retro-feature__photo--desktop{
+    display:block!important;
+    -webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 8%,#000 92%,transparent 100%)!important;
+    mask-image:linear-gradient(90deg,transparent 0%,#000 8%,#000 92%,transparent 100%)!important;
+    -webkit-mask-repeat:no-repeat!important;
+    mask-repeat:no-repeat!important;
+    -webkit-mask-size:100% 100%!important;
+    mask-size:100% 100%!important;
   }
-
-  html body .mt-home .mt-retro-feature__content{
-    position:relative!important;
-    z-index:2!important;
-    min-height:620px!important;
-    justify-content:center!important;
-    padding-top:72px!important;
-    padding-bottom:72px!important;
-    overflow:visible!important;
-  }
-
-  html body .mt-home .mt-retro-feature .mt-kicker{
-    margin-bottom:18px!important;
-    overflow:visible!important;
-  }
-
-  html body .mt-home .mt-retro-feature h2{
-    font-size:clamp(58px,8vw,112px)!important;
-    line-height:.96!important;
-    letter-spacing:-.055em!important;
-    margin:0 0 24px!important;
-    overflow:visible!important;
+  html body .mt-home .mt-retro-feature__title{
+    line-height:1.02!important;
   }
 }
