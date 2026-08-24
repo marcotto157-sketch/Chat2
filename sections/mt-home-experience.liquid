@@ -1,7 +1,11 @@
 {{ 'mt-home-experience.css' | asset_url | stylesheet_tag }}
+{{ 'mt-home-mobile-v15.css' | asset_url | stylesheet_tag }}
+{{ 'mt-final-fixes-v20.css' | asset_url | stylesheet_tag }}
 
-{% assign pronta = collections['pronta-entrega'] %}
-{% assign infantil = collections['infantil'] %}
+{% assign pronta = collections['pronta-entrega-🔥'] %}
+{% assign infantil = collections['kits-infantis'] %}
+{% assign inverno = collections['kit-de-inverno'] %}
+{% assign nba = collections['nba-manual'] %}
 {% assign retro = collections['retro-1'] %}
 
 <div class="mt-home">
@@ -15,8 +19,15 @@
         <div class="mt-products">
           {% for product in pronta.products limit: 6 %}
             <article class="mt-card">
-              <a class="mt-card__image" href="{{ product.url }}">{% if product.featured_image %}{{ product.featured_image | image_url: width: 700 | image_tag: loading: 'lazy', alt: product.title }}{% endif %}</a>
-              <div class="mt-card__body"><h3><a href="{{ product.url }}">{{ product.title }}</a></h3><div class="mt-card__price">{{ product.price | money }}</div></div>
+              <a class="mt-card__image" href="{{ product.url }}">
+                {% if product.featured_image %}{{ product.featured_image | image_url: width: 700 | image_tag: loading: 'lazy', alt: product.title }}{% endif %}
+                <span class="mt-card__stock">PRONTA ENTREGA</span>
+              </a>
+              <div class="mt-card__body">
+                <h3><a href="{{ product.url }}">{{ product.title }}</a></h3>
+                <div class="mt-card__price">{{ product.price | money }}</div>
+                <div class="mt-card__installment">ou em até 12x no cartão</div>
+              </div>
             </article>
           {% endfor %}
         </div>
@@ -27,23 +38,103 @@
   {% if infantil != blank and infantil.products_count > 0 %}
     <section class="mt-section mt-section--alternate">
       <div class="mt-shell">
-        <div class="mt-heading"><div><span>PARA OS PEQUENOS</span><h2>Kits Infantis</h2></div><a href="{{ infantil.url }}">VER TODOS</a></div>
+        <div class="mt-heading">
+          <div><span>PARA OS PEQUENOS</span><h2>Kits Infantis</h2></div>
+          <a href="{{ infantil.url }}">VER TODOS</a>
+        </div>
         <div class="mt-products">
           {% for product in infantil.products limit: 6 %}
-            <article class="mt-card"><a class="mt-card__image" href="{{ product.url }}">{% if product.featured_image %}{{ product.featured_image | image_url: width: 700 | image_tag: loading: 'lazy', alt: product.title }}{% endif %}</a><div class="mt-card__body"><h3><a href="{{ product.url }}">{{ product.title }}</a></h3><div class="mt-card__price">{{ product.price | money }}</div></div></article>
+            <article class="mt-card">
+              <a class="mt-card__image" href="{{ product.url }}">{% if product.featured_image %}{{ product.featured_image | image_url: width: 700 | image_tag: loading: 'lazy', alt: product.title }}{% endif %}</a>
+              <div class="mt-card__body"><h3><a href="{{ product.url }}">{{ product.title }}</a></h3><div class="mt-card__price">{{ product.price | money }}</div><div class="mt-card__installment">ou em até 12x no cartão</div></div>
+            </article>
           {% endfor %}
         </div>
       </div>
     </section>
   {% endif %}
 
-  <section class="mt-hero mt-hero--nba"><div class="mt-hero__photo"></div><div class="mt-hero__shade"></div><div class="mt-shell mt-hero__content"><span class="mt-kicker">BASQUETE</span><h2>REGATAS<br><span>NBA</span></h2><p>Modelos atuais e clássicos para quem vive o basquete.</p><a class="mt-button" href="/collections/nba-1">VER REGATAS</a></div></section>
+  {% if inverno != blank and inverno.products_count > 0 %}
+    <section class="mt-section mt-section--dark">
+      <div class="mt-shell">
+        <div class="mt-heading">
+          <div><span>PARA OS DIAS FRIOS</span><h2>Conjuntos de Inverno</h2></div>
+          <a href="{{ inverno.url }}">VER TODOS</a>
+        </div>
+        <div class="mt-products">
+          {% for product in inverno.products limit: 6 %}
+            <article class="mt-card">
+              <a class="mt-card__image" href="{{ product.url }}">{% if product.featured_image %}{{ product.featured_image | image_url: width: 700 | image_tag: loading: 'lazy', alt: product.title }}{% endif %}</a>
+              <div class="mt-card__body"><h3><a href="{{ product.url }}">{{ product.title }}</a></h3><div class="mt-card__price">{{ product.price | money }}</div><div class="mt-card__installment">ou em até 12x no cartão</div></div>
+            </article>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+  {% endif %}
 
-  <section class="mt-retro-feature"><img class="mt-retro-feature__photo" src="{{ 'mt-ronaldinho-retro-v6.jpg' | asset_url }}" alt="Camisas retrô" loading="lazy"><div class="mt-retro-feature__shade"></div><div class="mt-shell mt-retro-feature__content"><span class="mt-kicker">BOAS LEMBRANÇAS</span><h2>CAMISAS<br>RETRÔ</h2><p>Histórias que marcaram gerações.</p><a class="mt-button" href="/collections/retro-1">VER RETRÔS</a></div></section>
+  <section class="mt-hero mt-hero--nba">
+    <div class="mt-hero__photo"></div>
+    <div class="mt-hero__shade"></div>
+    <div class="mt-shell mt-hero__content">
+      <span class="mt-kicker">BASQUETE</span>
+      <h2>REGATAS<br><span>NBA</span></h2>
+      <p>Modelos atuais e clássicos para quem vive o basquete.</p>
+      <a class="mt-button" href="{{ nba.url | default: '/collections/nba-manual' }}">VER REGATAS</a>
+    </div>
+  </section>
+
+  {% if nba != blank and nba.products_count > 0 %}
+    <section class="mt-section mt-section--alternate">
+      <div class="mt-shell">
+        <div class="mt-heading">
+          <div><span>BASQUETE</span><h2>NBA</h2></div>
+          <a href="{{ nba.url }}">VER TODOS</a>
+        </div>
+        <div class="mt-products">
+          {% for product in nba.products limit: 6 %}
+            <article class="mt-card">
+              <a class="mt-card__image" href="{{ product.url }}">{% if product.featured_image %}{{ product.featured_image | image_url: width: 700 | image_tag: loading: 'lazy', alt: product.title }}{% endif %}</a>
+              <div class="mt-card__body"><h3><a href="{{ product.url }}">{{ product.title }}</a></h3><div class="mt-card__price">{{ product.price | money }}</div><div class="mt-card__installment">ou em até 12x no cartão</div></div>
+            </article>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+  {% endif %}
+
+  <section class="mt-retro-feature">
+    <img class="mt-retro-feature__photo mt-retro-feature__photo--desktop" src="{{ 'mt-ronaldinho-retro-v6.jpg' | asset_url }}" alt="Camisas retrô" loading="lazy">
+    <img class="mt-retro-feature__photo mt-retro-feature__photo--mobile" src="{{ 'mt-ronaldinho-retro-mobile-v20.jpg' | asset_url }}" alt="Camisas retrô" loading="lazy" hidden>
+    <div class="mt-retro-feature__shade"></div>
+    <div class="mt-shell mt-retro-feature__content">
+      <span class="mt-kicker">BOAS LEMBRANÇAS</span>
+      <h2>CAMISAS<br>RETRÔ</h2>
+      <p>Histórias que marcaram gerações.</p>
+      <a class="mt-button" href="{{ retro.url | default: '/collections/retro-1' }}">VER RETRÔS</a>
+    </div>
+  </section>
 
   {% if retro != blank and retro.products_count > 0 %}
-    <section class="mt-section mt-section--dark"><div class="mt-shell"><div class="mt-heading"><div><span>CLÁSSICOS</span><h2>Retrôs</h2></div><a href="{{ retro.url }}">VER TODOS</a></div><div class="mt-products">{% for product in retro.products limit: 6 %}<article class="mt-card"><a class="mt-card__image" href="{{ product.url }}">{% if product.featured_image %}{{ product.featured_image | image_url: width: 700 | image_tag: loading: 'lazy', alt: product.title }}{% endif %}</a><div class="mt-card__body"><h3><a href="{{ product.url }}">{{ product.title }}</a></h3><div class="mt-card__price">{{ product.price | money }}</div></div></article>{% endfor %}</div></div></section>
+    <section class="mt-section mt-section--dark">
+      <div class="mt-shell">
+        <div class="mt-heading">
+          <div><span>CLÁSSICOS</span><h2>Retrôs</h2></div>
+          <a href="{{ retro.url }}">VER TODOS</a>
+        </div>
+        <div class="mt-products">
+          {% for product in retro.products limit: 6 %}
+            <article class="mt-card">
+              <a class="mt-card__image" href="{{ product.url }}">{% if product.featured_image %}{{ product.featured_image | image_url: width: 700 | image_tag: loading: 'lazy', alt: product.title }}{% endif %}</a>
+              <div class="mt-card__body"><h3><a href="{{ product.url }}">{{ product.title }}</a></h3><div class="mt-card__price">{{ product.price | money }}</div><div class="mt-card__installment">ou em até 12x no cartão</div></div>
+            </article>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
   {% endif %}
 </div>
 
-{% schema %}{"name":"MT - Home Experience","settings":[],"presets":[{"name":"MT - Home Experience"}]}{% endschema %}
+{% schema %}
+{"name":"MT - Home Experience","settings":[],"presets":[{"name":"MT - Home Experience"}]}
+{% endschema %}
