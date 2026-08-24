@@ -27,7 +27,7 @@ html body .mt-home .mt-premier-section .mt-heading h2{
   }
 }
 
-/* Desktop Ronaldinho — volta à composição original e só suaviza as bordas laterais */
+/* Desktop Ronaldinho — mantém proporções e remove qualquer corte lateral */
 @media screen and (min-width:701px){
   html body .mt-home .mt-retro-feature{
     background-color:#11141a!important;
@@ -41,14 +41,12 @@ html body .mt-home .mt-premier-section .mt-heading h2{
   }
   html body .mt-home .mt-retro-feature__photo--desktop{
     display:block!important;
-    -webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 8%,#000 92%,transparent 100%)!important;
-    mask-image:linear-gradient(90deg,transparent 0%,#000 8%,#000 92%,transparent 100%)!important;
-    -webkit-mask-repeat:no-repeat!important;
-    mask-repeat:no-repeat!important;
-    -webkit-mask-size:100% 100%!important;
-    mask-size:100% 100%!important;
+    -webkit-mask-image:none!important;
+    mask-image:none!important;
+    -webkit-mask:none!important;
+    mask:none!important;
   }
-  html body .mt-home .mt-retro-feature__title{
+  html body .mt-home .mt-retro-feature h2{
     line-height:1.02!important;
   }
 }
