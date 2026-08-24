@@ -1,63 +1,22 @@
 {{ 'mt-home-experience.css' | asset_url | stylesheet_tag }}
 
-{% assign lancamentos = collections['lancamentos'] %}
+{% assign pronta = collections['pronta-entrega'] %}
 {% assign infantil = collections['infantil'] %}
 {% assign retro = collections['retro-1'] %}
 
 <div class="mt-home">
-  <section class="mt-benefits">
-    <div class="mt-shell mt-benefits__grid">
-      <div>
-        <span class="mt-benefit-icon" aria-hidden="true">✓</span>
-        <p><strong>COMPRA SEGURA</strong><span>Ambiente protegido do início ao fim.</span></p>
-      </div>
-      <div>
-        <span class="mt-benefit-icon" aria-hidden="true">↗</span>
-        <p><strong>ENVIO IMEDIATO</strong><span>Para produtos da pronta entrega.</span></p>
-      </div>
-      <div>
-        <span class="mt-benefit-icon mt-benefit-icon--shirts" aria-hidden="true"><b>2</b><b>+</b><b>1</b></span>
-        <p><strong>LEVE 3, PAGUE 2</strong><span>Promoção nas camisas participantes.</span></p>
-      </div>
-      <div>
-        <span class="mt-benefit-icon" aria-hidden="true">◉</span>
-        <p><strong>ATENDIMENTO</strong><span>Suporte antes e depois da compra.</span></p>
-      </div>
-    </div>
-  </section>
-
-  <section class="mt-section mt-categories">
-    <div class="mt-shell">
-      <div class="mt-heading">
-        <div><span>ESCOLHA SUA CATEGORIA</span><h2>Encontre sua camisa</h2></div>
-      </div>
-      <div class="mt-categories__grid">
-        <a class="mt-category mt-category--brasil" href="/collections/camisas-nacionais"><span class="mt-category__shade"></span><strong>BRASILEIROS</strong><small>Clubes do Brasil</small></a>
-        <a class="mt-category mt-category--selections" href="/collections/selecoes"><span class="mt-category__shade"></span><strong>SELEÇÕES</strong><small>Camisas de seleções</small></a>
-        <a class="mt-category mt-category--retro" href="/collections/retro-1"><span class="mt-category__shade"></span><strong>RETRÔS</strong><small>Clássicos inesquecíveis</small></a>
-        <a class="mt-category mt-category--europe" href="/collections/europeus"><span class="mt-category__shade"></span><strong>EUROPEUS</strong><small>Clubes da Europa</small></a>
-      </div>
-    </div>
-  </section>
-
-  {% if lancamentos != blank and lancamentos.products_count > 0 %}
+  {% if pronta != blank and pronta.products_count > 0 %}
     <section class="mt-section mt-section--dark">
       <div class="mt-shell">
         <div class="mt-heading">
-          <div><span>NOVIDADES</span><h2>Lançamentos</h2></div>
-          <a href="{{ lancamentos.url }}">VER TODOS</a>
+          <div><span>ENVIO MAIS RÁPIDO</span><h2>Pronta Entrega</h2></div>
+          <a href="{{ pronta.url }}">VER TODOS</a>
         </div>
         <div class="mt-products">
-          {% for product in lancamentos.products limit: 6 %}
+          {% for product in pronta.products limit: 6 %}
             <article class="mt-card">
-              <a class="mt-card__image" href="{{ product.url }}">
-                {% if product.featured_image %}{{ product.featured_image | image_url: width: 700 | image_tag: loading: 'lazy', alt: product.title }}{% endif %}
-              </a>
-              <div class="mt-card__body">
-                <h3><a href="{{ product.url }}">{{ product.title }}</a></h3>
-                <div class="mt-card__price">{{ product.price | money }}</div>
-                <div class="mt-card__installment">ou em até 12x no cartão</div>
-              </div>
+              <a class="mt-card__image" href="{{ product.url }}">{% if product.featured_image %}{{ product.featured_image | image_url: width: 700 | image_tag: loading: 'lazy', alt: product.title }}{% endif %}</a>
+              <div class="mt-card__body"><h3><a href="{{ product.url }}">{{ product.title }}</a></h3><div class="mt-card__price">{{ product.price | money }}</div></div>
             </article>
           {% endfor %}
         </div>
@@ -68,78 +27,23 @@
   {% if infantil != blank and infantil.products_count > 0 %}
     <section class="mt-section mt-section--alternate">
       <div class="mt-shell">
-        <div class="mt-heading">
-          <div><span>PARA OS PEQUENOS</span><h2>Kits Infantis</h2></div>
-          <a href="{{ infantil.url }}">VER TODOS</a>
-        </div>
+        <div class="mt-heading"><div><span>PARA OS PEQUENOS</span><h2>Kits Infantis</h2></div><a href="{{ infantil.url }}">VER TODOS</a></div>
         <div class="mt-products">
           {% for product in infantil.products limit: 6 %}
-            <article class="mt-card">
-              <a class="mt-card__image" href="{{ product.url }}">
-                {% if product.featured_image %}{{ product.featured_image | image_url: width: 700 | image_tag: loading: 'lazy', alt: product.title }}{% endif %}
-              </a>
-              <div class="mt-card__body">
-                <h3><a href="{{ product.url }}">{{ product.title }}</a></h3>
-                <div class="mt-card__price">{{ product.price | money }}</div>
-              </div>
-            </article>
+            <article class="mt-card"><a class="mt-card__image" href="{{ product.url }}">{% if product.featured_image %}{{ product.featured_image | image_url: width: 700 | image_tag: loading: 'lazy', alt: product.title }}{% endif %}</a><div class="mt-card__body"><h3><a href="{{ product.url }}">{{ product.title }}</a></h3><div class="mt-card__price">{{ product.price | money }}</div></div></article>
           {% endfor %}
         </div>
       </div>
     </section>
   {% endif %}
 
-  <section class="mt-hero mt-hero--nba">
-    <div class="mt-hero__photo"></div>
-    <div class="mt-hero__shade"></div>
-    <div class="mt-shell mt-hero__content">
-      <span class="mt-kicker">BASQUETE</span>
-      <h2>REGATAS<br><span>NBA</span></h2>
-      <p>Modelos atuais e clássicos para quem vive o basquete.</p>
-      <a class="mt-button" href="/collections/nba-1">VER REGATAS</a>
-    </div>
-  </section>
+  <section class="mt-hero mt-hero--nba"><div class="mt-hero__photo"></div><div class="mt-hero__shade"></div><div class="mt-shell mt-hero__content"><span class="mt-kicker">BASQUETE</span><h2>REGATAS<br><span>NBA</span></h2><p>Modelos atuais e clássicos para quem vive o basquete.</p><a class="mt-button" href="/collections/nba-1">VER REGATAS</a></div></section>
 
-  <section class="mt-retro-feature">
-    <img class="mt-retro-feature__photo" src="{{ 'mt-ronaldinho-retro-v6.jpg' | asset_url }}" alt="Camisas retrô" loading="lazy">
-    <div class="mt-retro-feature__shade"></div>
-    <div class="mt-shell mt-retro-feature__content">
-      <span class="mt-kicker">BOAS LEMBRANÇAS</span>
-      <h2>CAMISAS<br>RETRÔ</h2>
-      <p>Histórias que marcaram gerações.</p>
-      <a class="mt-button" href="/collections/retro-1">VER RETRÔS</a>
-    </div>
-  </section>
+  <section class="mt-retro-feature"><img class="mt-retro-feature__photo" src="{{ 'mt-ronaldinho-retro-v6.jpg' | asset_url }}" alt="Camisas retrô" loading="lazy"><div class="mt-retro-feature__shade"></div><div class="mt-shell mt-retro-feature__content"><span class="mt-kicker">BOAS LEMBRANÇAS</span><h2>CAMISAS<br>RETRÔ</h2><p>Histórias que marcaram gerações.</p><a class="mt-button" href="/collections/retro-1">VER RETRÔS</a></div></section>
 
   {% if retro != blank and retro.products_count > 0 %}
-    <section class="mt-section mt-section--dark">
-      <div class="mt-shell">
-        <div class="mt-heading">
-          <div><span>CLÁSSICOS</span><h2>Retrôs</h2></div>
-          <a href="{{ retro.url }}">VER TODOS</a>
-        </div>
-        <div class="mt-products">
-          {% for product in retro.products limit: 6 %}
-            <article class="mt-card">
-              <a class="mt-card__image" href="{{ product.url }}">
-                {% if product.featured_image %}{{ product.featured_image | image_url: width: 700 | image_tag: loading: 'lazy', alt: product.title }}{% endif %}
-              </a>
-              <div class="mt-card__body">
-                <h3><a href="{{ product.url }}">{{ product.title }}</a></h3>
-                <div class="mt-card__price">{{ product.price | money }}</div>
-              </div>
-            </article>
-          {% endfor %}
-        </div>
-      </div>
-    </section>
+    <section class="mt-section mt-section--dark"><div class="mt-shell"><div class="mt-heading"><div><span>CLÁSSICOS</span><h2>Retrôs</h2></div><a href="{{ retro.url }}">VER TODOS</a></div><div class="mt-products">{% for product in retro.products limit: 6 %}<article class="mt-card"><a class="mt-card__image" href="{{ product.url }}">{% if product.featured_image %}{{ product.featured_image | image_url: width: 700 | image_tag: loading: 'lazy', alt: product.title }}{% endif %}</a><div class="mt-card__body"><h3><a href="{{ product.url }}">{{ product.title }}</a></h3><div class="mt-card__price">{{ product.price | money }}</div></div></article>{% endfor %}</div></div></section>
   {% endif %}
 </div>
 
-{% schema %}
-{
-  "name": "MT - Home Experience",
-  "settings": [],
-  "presets": [{ "name": "MT - Home Experience" }]
-}
-{% endschema %}
+{% schema %}{"name":"MT - Home Experience","settings":[],"presets":[{"name":"MT - Home Experience"}]}{% endschema %}
