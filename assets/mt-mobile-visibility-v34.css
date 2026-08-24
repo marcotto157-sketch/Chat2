@@ -27,47 +27,32 @@ html body .mt-home .mt-premier-section .mt-heading h2{
   }
 }
 
-/* V40 — Ronaldinho desktop: uma única imagem contínua no fundo. Remove por completo as divisórias/cortes laterais. Mobile intocado. */
+/* V40 — desktop: uma única camada visual, sem emendas/divisórias. Mobile intocado. */
 @media screen and (min-width:701px){
   html body .mt-home .mt-retro-feature{
     position:relative!important;
     overflow:hidden!important;
     isolation:isolate!important;
-    background-color:#11141a!important;
-    background-image:url('https://cdn.shopify.com/s/files/1/0748/8415/3575/files/mt-ronaldinho-retro-desktop-final.jpg?v=1787466559')!important;
-    background-size:cover!important;
-    background-position:72% center!important;
-    background-repeat:no-repeat!important;
+    background:#11141a url('https://cdn.shopify.com/s/files/1/0748/8415/3575/files/mt-ronaldinho-retro-desktop-final.jpg?v=1787466559') 72% center/cover no-repeat!important;
   }
-
-  /* Desliga as duas camadas duplicadas que estavam gerando a emenda vertical. */
-  html body .mt-home .mt-retro-feature:before{
+  html body .mt-home .mt-retro-feature:before,
+  html body .mt-home .mt-retro-feature:after{
     display:none!important;
     content:none!important;
+    background:none!important;
   }
   html body .mt-home .mt-retro-feature__photo--desktop{
     display:none!important;
   }
-
-  /* Mantém apenas o degradê do lado do texto, sem borda/divisória. */
-  html body .mt-home .mt-retro-feature:after{
-    display:block!important;
-    content:""!important;
-    position:absolute!important;
-    inset:0!important;
-    z-index:2!important;
-    background:linear-gradient(90deg,#11141a 0%,rgba(17,20,26,.96) 22%,rgba(17,20,26,.78) 36%,rgba(17,20,26,.42) 50%,rgba(17,20,26,.14) 63%,rgba(17,20,26,0) 78%)!important;
-    pointer-events:none!important;
-  }
   html body .mt-home .mt-retro-feature__shade{
     position:absolute!important;
     inset:0!important;
-    z-index:3!important;
-    background:linear-gradient(90deg,rgba(17,20,26,.78) 0%,rgba(17,20,26,.62) 24%,rgba(17,20,26,.30) 42%,rgba(17,20,26,.08) 58%,rgba(17,20,26,0) 72%)!important;
+    z-index:1!important;
+    background:linear-gradient(90deg,rgba(17,20,26,.98) 0%,rgba(17,20,26,.90) 24%,rgba(17,20,26,.58) 42%,rgba(17,20,26,.18) 60%,rgba(17,20,26,0) 78%)!important;
     pointer-events:none!important;
   }
   html body .mt-home .mt-retro-feature__content{
     position:relative!important;
-    z-index:4!important;
+    z-index:2!important;
   }
 }
