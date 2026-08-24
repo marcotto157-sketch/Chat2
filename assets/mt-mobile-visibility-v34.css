@@ -7,8 +7,9 @@
     background:linear-gradient(90deg,rgba(10,12,16,.76) 0%,rgba(10,12,16,.50) 38%,rgba(10,12,16,.12) 68%,rgba(10,12,16,0) 100%),linear-gradient(0deg,rgba(10,12,16,.38) 0%,rgba(10,12,16,.04) 58%,rgba(10,12,16,0) 100%)!important;
   }
 }
-/* Premier League: título principal maior, mantendo FUTEBOL INGLÊS como etiqueta */
+/* Premier League: título principal maior e visível, mantendo FUTEBOL INGLÊS como etiqueta */
 html body .mt-home .mt-premier-section .mt-heading h2{
+  color:#fff!important;
   font-size:clamp(38px,4vw,52px)!important;
   line-height:1.03!important;
   letter-spacing:-.03em!important;
@@ -16,6 +17,7 @@ html body .mt-home .mt-premier-section .mt-heading h2{
 }
 @media screen and (max-width:700px){
   html body .mt-home .mt-premier-section .mt-heading h2{
+    color:#fff!important;
     font-size:36px!important;
     line-height:1.04!important;
   }
