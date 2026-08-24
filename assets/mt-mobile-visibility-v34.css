@@ -27,78 +27,65 @@ html body .mt-home .mt-premier-section .mt-heading h2{
   }
 }
 
-/* V38 — Ronaldinho desktop: mantém proporção e elimina as emendas laterais com degradê real. Mobile intocado. */
+/* V39 — Ronaldinho desktop no mesmo princípio do Memphis: foto vai até a borda direita e só funde pela esquerda. Mobile intocado. */
 @media screen and (min-width:701px){
   html body .mt-home .mt-retro-feature{
     position:relative!important;
     overflow:hidden!important;
     isolation:isolate!important;
-    background:#080a0e!important;
+    background:#11141a!important;
   }
-
-  /* Fundo usa a mesma foto ampliada e desfocada: assim não existe um bloco diferente atrás da arte principal. */
   html body .mt-home .mt-retro-feature:before{
     display:block!important;
     content:""!important;
     position:absolute!important;
-    inset:-16%!important;
+    inset:-12%!important;
     z-index:0!important;
-    background-image:url('https://cdn.shopify.com/s/files/1/0748/8415/3575/files/mt-ronaldinho-retro-desktop-final.jpg?v=1787466559')!important;
-    background-size:cover!important;
-    background-position:70% 50%!important;
-    background-repeat:no-repeat!important;
-    filter:blur(38px) brightness(.25) saturate(.82)!important;
-    transform:scale(1.22)!important;
-    opacity:1!important;
+    background:url('https://cdn.shopify.com/s/files/1/0748/8415/3575/files/mt-ronaldinho-retro-desktop-final.jpg?v=1787466559') 72% center/cover no-repeat!important;
+    filter:blur(30px) brightness(.28) saturate(.76)!important;
+    transform:scale(1.20)!important;
     pointer-events:none!important;
   }
-
-  /* Arte principal continua no mesmo formato de desktop; apenas as DUAS laterais desaparecem aos poucos. */
   html body .mt-home .mt-retro-feature__photo--desktop{
     display:block!important;
     position:absolute!important;
     z-index:1!important;
-    top:0!important;
-    right:0!important;
-    bottom:0!important;
-    left:auto!important;
-    width:74%!important;
-    height:100%!important;
+    top:-2%!important;
+    right:-3%!important;
+    bottom:-2%!important;
+    left:33%!important;
+    width:auto!important;
+    height:104%!important;
     max-width:none!important;
     max-height:none!important;
-    object-fit:contain!important;
-    object-position:center center!important;
+    object-fit:cover!important;
+    object-position:72% center!important;
     transform:none!important;
     background:transparent!important;
-    filter:brightness(.79) contrast(1.03) saturate(.96)!important;
-    opacity:1!important;
-    -webkit-mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.05) 3%,rgba(0,0,0,.18) 7%,rgba(0,0,0,.42) 12%,rgba(0,0,0,.72) 17%,rgba(0,0,0,.93) 22%,#000 27%,#000 73%,rgba(0,0,0,.93) 78%,rgba(0,0,0,.72) 83%,rgba(0,0,0,.42) 88%,rgba(0,0,0,.18) 93%,rgba(0,0,0,.05) 97%,transparent 100%)!important;
-    mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.05) 3%,rgba(0,0,0,.18) 7%,rgba(0,0,0,.42) 12%,rgba(0,0,0,.72) 17%,rgba(0,0,0,.93) 22%,#000 27%,#000 73%,rgba(0,0,0,.93) 78%,rgba(0,0,0,.72) 83%,rgba(0,0,0,.42) 88%,rgba(0,0,0,.18) 93%,rgba(0,0,0,.05) 97%,transparent 100%)!important;
-    -webkit-mask-size:100% 100%!important;
-    mask-size:100% 100%!important;
+    filter:brightness(.78) contrast(1.03) saturate(.95)!important;
+    -webkit-mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.14) 5%,rgba(0,0,0,.78) 17%,#000 29%,#000 100%)!important;
+    mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.14) 5%,rgba(0,0,0,.78) 17%,#000 29%,#000 100%)!important;
     -webkit-mask-repeat:no-repeat!important;
     mask-repeat:no-repeat!important;
+    -webkit-mask-size:100% 100%!important;
+    mask-size:100% 100%!important;
   }
-
-  /* Véu escuro só para integrar o lado do texto; não cria borda na direita. */
   html body .mt-home .mt-retro-feature:after{
     display:block!important;
     content:""!important;
     position:absolute!important;
     inset:0!important;
     z-index:2!important;
-    background:linear-gradient(90deg,rgba(8,10,14,.96) 0%,rgba(8,10,14,.82) 17%,rgba(8,10,14,.53) 29%,rgba(8,10,14,.23) 41%,rgba(8,10,14,.07) 52%,rgba(8,10,14,0) 64%)!important;
+    background:linear-gradient(90deg,#11141a 0%,#11141a 24%,rgba(17,20,26,.90) 38%,rgba(17,20,26,.43) 53%,rgba(17,20,26,.09) 73%,rgba(17,20,26,0) 100%)!important;
     pointer-events:none!important;
   }
-
   html body .mt-home .mt-retro-feature__shade{
     position:absolute!important;
     inset:0!important;
     z-index:3!important;
-    background:linear-gradient(90deg,rgba(7,9,13,.97) 0%,rgba(7,9,13,.87) 18%,rgba(7,9,13,.60) 31%,rgba(7,9,13,.22) 46%,rgba(7,9,13,.04) 62%,rgba(7,9,13,0) 76%)!important;
+    background:linear-gradient(90deg,rgba(17,20,26,.96) 0%,rgba(17,20,26,.88) 24%,rgba(17,20,26,.52) 42%,rgba(17,20,26,.15) 60%,rgba(17,20,26,0) 78%)!important;
     pointer-events:none!important;
   }
-
   html body .mt-home .mt-retro-feature__content{
     position:relative!important;
     z-index:4!important;
