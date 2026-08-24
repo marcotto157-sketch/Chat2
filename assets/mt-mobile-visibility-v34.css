@@ -1,0 +1,25 @@
+/* MT Sports V35 — acabamento final responsivo */
+@media screen and (max-width:700px){
+  html body .mt-home .mt-retro-feature__photo--mobile{
+    filter:brightness(.94) contrast(1.02) saturate(1)!important;
+  }
+  html body .mt-home .mt-retro-feature__shade{
+    background:linear-gradient(90deg,rgba(10,12,16,.76) 0%,rgba(10,12,16,.50) 38%,rgba(10,12,16,.12) 68%,rgba(10,12,16,0) 100%),linear-gradient(0deg,rgba(10,12,16,.38) 0%,rgba(10,12,16,.04) 58%,rgba(10,12,16,0) 100%)!important;
+  }
+}
+/* Premier League: mesma hierarquia visual das demais coleções, sem título exagerado */
+html body .mt-home .mt-premier-section .mt-heading h2{
+  font-size:clamp(28px,3vw,40px)!important;
+  line-height:1.06!important;
+  letter-spacing:-.025em!important;
+  margin-top:5px!important;
+}
+@media screen and (max-width:700px){
+  html body .mt-home .mt-premier-section .mt-heading h2{
+    font-size:28px!important;
+    line-height:1.08!important;
+  }
+  html body .mt-home .mt-premier-section .mt-section-message{
+    display:none!important;
+  }
+}
