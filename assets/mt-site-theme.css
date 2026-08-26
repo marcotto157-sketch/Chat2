@@ -111,3 +111,5 @@ body.template-product #badges-product .badge-icon,
 body.template-product #badges-product .badge-icon g,
 body.template-product #badges-product .badge-icon path{fill:#fff!important;color:#fff!important}
 body.template-product .product-block-list__item--description img{clip-path:inset(2.2% 1.8% 1.8% 1.8%)!important}
+/* O tema usa um menu móvel próprio. Esconde o menu legado para evitar a lista branca duplicada. */
+@media screen and (max-width:999px){#mobile-menu.mobile-menu{display:none!important;visibility:hidden!important;opacity:0!important;max-height:0!important}}
