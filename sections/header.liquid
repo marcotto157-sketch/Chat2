@@ -147,7 +147,7 @@
               <span class="icon-state__secondary">{%- render 'icon', icon: 'close' -%}</span>
             </button>
 
-            {%- render 'mobile-menu', menu: navigation_menu -%}
+            {%- comment -%}O menu móvel é criado por mt-menu-fix.js; o menu legado foi removido para não aparecer duplicado no rodapé.{%- endcomment -%}
           </nav>
         {%- endif -%}
 
