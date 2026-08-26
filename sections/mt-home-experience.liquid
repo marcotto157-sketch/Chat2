@@ -44,7 +44,25 @@
     <section class="mt-section mt-section--dark">
       <div class="mt-shell">
         <div class="mt-heading"><div><span>VISTA SUAS CORES</span><h2>Seleções</h2><p class="mt-section-message">As camisas das maiores seleções do mundo em um só lugar.</p></div><a href="{{ selecoes.url }}">VER TODOS</a></div>
-        <div class="mt-products">{% for product in selecoes.products limit: 6 %}<article class="mt-card"><a class="mt-card__image" href="{{ product.url }}">{% if product.featured_image %}{{ product.featured_image | image_url: width: 700 | image_tag: loading: 'lazy', alt: product.title }}{% endif %}</a><div class="mt-card__body"><h3><a href="{{ product.url }}">{{ product.title }}</a></h3><div class="mt-card__price">{{ product.price | money }}</div><div class="mt-card__installment">ou em até 12x no cartão</div></div></article>{% endfor %}</div>
+        <div class="mt-products">
+          {% assign mt_selecoes_count = 0 %}
+          {% for product in selecoes.products %}
+            {% assign mt_selection_title = product.title | upcase %}
+            {% assign mt_allowed_country = false %}
+            {% if mt_selection_title contains 'BRASIL' or mt_selection_title contains 'ALEMANHA' or mt_selection_title contains 'ARGENTINA' or mt_selection_title contains 'HOLANDA' or mt_selection_title contains 'PAÍSES BAIXOS' or mt_selection_title contains 'PAISES BAIXOS' or mt_selection_title contains 'ESPANHA' or mt_selection_title contains 'INGLATERRA' or mt_selection_title contains 'NORUEGA' or mt_selection_title contains 'URUGUAI' or mt_selection_title contains 'PARAGUAI' or mt_selection_title contains 'FRANÇA' or mt_selection_title contains 'FRANCA' or mt_selection_title contains 'ITÁLIA' or mt_selection_title contains 'ITALIA' or mt_selection_title contains 'CROÁCIA' or mt_selection_title contains 'CROACIA' or mt_selection_title contains 'SUÍÇA' or mt_selection_title contains 'SUICA' %}
+              {% assign mt_allowed_country = true %}
+            {% endif %}
+            {% assign mt_block_selection = false %}
+            {% if mt_selection_title contains 'RETRÔ' or mt_selection_title contains 'RETRO' or mt_selection_title contains 'INFANTIL' or mt_selection_title contains 'KIT' %}
+              {% assign mt_block_selection = true %}
+            {% endif %}
+            {% if mt_allowed_country and mt_block_selection == false and mt_selection_title contains 'CAMISA' %}
+              <article class="mt-card"><a class="mt-card__image" href="{{ product.url }}">{% if product.featured_image %}{{ product.featured_image | image_url: width: 700 | image_tag: loading: 'lazy', alt: product.title }}{% endif %}</a><div class="mt-card__body"><h3><a href="{{ product.url }}">{{ product.title }}</a></h3><div class="mt-card__price">{{ product.price | money }}</div><div class="mt-card__installment">ou em até 12x no cartão</div></div></article>
+              {% assign mt_selecoes_count = mt_selecoes_count | plus: 1 %}
+              {% if mt_selecoes_count == 6 %}{% break %}{% endif %}
+            {% endif %}
+          {% endfor %}
+        </div>
       </div>
     </section>
   {% endif %}
