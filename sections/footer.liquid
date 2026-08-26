@@ -293,6 +293,15 @@
           <div class="footer__aside-item">
             <p class="footer__aside-title" id="seguranca">{{ 'footer.general.security' | t }}</p>
             {{ section.settings.security_seals }}
+            <script>
+              (function(){
+                var title=document.getElementById('seguranca');
+                if(!title||!title.parentNode)return;
+                title.parentNode.querySelectorAll('img[data-src]').forEach(function(img){
+                  if(img.dataset.src)img.src=img.dataset.src;
+                });
+              }());
+            </script>
           </div>
         {%- endif -%}
 
