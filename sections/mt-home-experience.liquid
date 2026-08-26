@@ -4,6 +4,8 @@
 {{ 'mt-mobile-visibility-v34.css' | asset_url | stylesheet_tag }}
 
 {% assign pronta = collections['pronta-entrega-🔥'] %}
+{% assign jogador = section.settings.player_collection %}
+{% if jogador == blank %}{% assign jogador = collections['versao-jogador'] %}{% endif %}
 {% assign premier = collections['premier-league'] %}
 {% assign brasileiros = collections['camisas-nacionais'] %}
 {% assign europeus = collections['europeus'] %}
@@ -25,6 +27,24 @@
             <article class="mt-card"><a class="mt-card__image" href="{{ product.url }}">{% if product.featured_image %}{{ product.featured_image | image_url: width: 700 | image_tag: loading: 'lazy', alt: product.title }}{% endif %}<span class="mt-card__stock">PRONTA ENTREGA</span></a><div class="mt-card__body"><h3><a href="{{ product.url }}">{{ product.title }}</a></h3><div class="mt-card__price">{{ product.price | money }}</div><div class="mt-card__installment">ou em até 12x no cartão</div>{% if product_title_upper contains 'CAMISA' %}<div class="mt-card__promo" aria-label="Leve 3, pague 2 MT"><span>MT</span><strong>LEVE 3, PAGUE 2</strong></div>{% endif %}</div></article>
           {% endfor %}
         </div>
+      </div>
+    </section>
+  {% endif %}
+
+  {% if jogador != blank and jogador.products_count > 0 %}
+    <section class="mt-section mt-section--alternate">
+      <div class="mt-shell">
+        <div class="mt-heading"><div><span>PERFORMANCE EM CAMPO</span><h2>Versão Jogador</h2><p class="mt-section-message">Tecnologia, leveza e ajuste de atleta para vestir como os craques.</p></div><a href="{{ jogador.url }}">VER TODOS</a></div>
+        <div class="mt-products">{% for product in jogador.products limit: 6 %}<article class="mt-card"><a class="mt-card__image" href="{{ product.url }}">{% if product.featured_image %}{{ product.featured_image | image_url: width: 700 | image_tag: loading: 'lazy', alt: product.title }}{% endif %}</a><div class="mt-card__body"><h3><a href="{{ product.url }}">{{ product.title }}</a></h3><div class="mt-card__price">{{ product.price | money }}</div><div class="mt-card__installment">ou em até 12x no cartão</div></div></article>{% endfor %}</div>
+      </div>
+    </section>
+  {% endif %}
+
+  {% if selecoes != blank and selecoes.products_count > 0 %}
+    <section class="mt-section mt-section--dark">
+      <div class="mt-shell">
+        <div class="mt-heading"><div><span>VISTA SUAS CORES</span><h2>Seleções</h2><p class="mt-section-message">As camisas das maiores seleções do mundo em um só lugar.</p></div><a href="{{ selecoes.url }}">VER TODOS</a></div>
+        <div class="mt-products">{% for product in selecoes.products limit: 6 %}<article class="mt-card"><a class="mt-card__image" href="{{ product.url }}">{% if product.featured_image %}{{ product.featured_image | image_url: width: 700 | image_tag: loading: 'lazy', alt: product.title }}{% endif %}</a><div class="mt-card__body"><h3><a href="{{ product.url }}">{{ product.title }}</a></h3><div class="mt-card__price">{{ product.price | money }}</div><div class="mt-card__installment">ou em até 12x no cartão</div></div></article>{% endfor %}</div>
       </div>
     </section>
   {% endif %}
@@ -57,4 +77,4 @@
   {% endif %}
 </div>
 <style>.mt-home .mt-section-message{margin:10px 0 0;color:#aeb3bc;font-size:14px;line-height:1.45;max-width:560px}.mt-home .mt-card__promo strong{grid-row:1/3;align-self:center}@media(max-width:700px){.mt-home .mt-section-message{font-size:12px;margin-top:7px}.mt-home .mt-categories__grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important}}</style>
-{% schema %}{"name":"MT - Home Experience","settings":[],"presets":[{"name":"MT - Home Experience"}]}{% endschema %}
+{% schema %}{"name":"MT - Home Experience","settings":[{"type":"collection","id":"player_collection","label":"Coleção Versão Jogador"}],"presets":[{"name":"MT - Home Experience"}]}{% endschema %}
