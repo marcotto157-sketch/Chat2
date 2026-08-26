@@ -3,58 +3,54 @@
 {{ 'mt-final-fixes-v20.css' | asset_url | stylesheet_tag }}
 {{ 'mt-mobile-visibility-v34.css' | asset_url | stylesheet_tag }}
 
-{% assign pronta = collections['pronta-entrega-🔥'] %}
-{% assign premier = collections['premier-league'] %}
-{% assign brasileiros = collections['camisas-nacionais'] %}
-{% assign europeus = collections['europeus'] %}
-{% assign selecoes = collections['selecoes'] %}
-{% assign inverno = collections['kit-de-inverno'] %}
-{% assign nba = collections['nba-1'] %}
-{% if nba == blank %}{% assign nba = collections['nba-manual'] %}{% endif %}
-{% assign retro = collections['retro-1'] %}
-{% assign camisas = collections['camisas'] %}
-
 <div class="mt-home">
-  {% if pronta != blank and pronta.products_count > 0 %}
-    <section class="mt-section mt-section--dark">
-      <div class="mt-shell">
-        <div class="mt-heading"><div><span>ENVIO MAIS RÁPIDO</span><h2>Pronta Entrega</h2></div><a href="{{ pronta.url }}">VER TODOS</a></div>
-        <div class="mt-products">
-          {% for product in pronta.products limit: 6 %}
-            {% assign product_title_upper = product.title | upcase %}
-            <article class="mt-card"><a class="mt-card__image" href="{{ product.url }}">{% if product.featured_image %}{{ product.featured_image | image_url: width: 700 | image_tag: loading: 'lazy', alt: product.title }}{% endif %}<span class="mt-card__stock">PRONTA ENTREGA</span></a><div class="mt-card__body"><h3><a href="{{ product.url }}">{{ product.title }}</a></h3><div class="mt-card__price">{{ product.price | money }}</div><div class="mt-card__installment">ou em até 12x no cartão</div>{% if product_title_upper contains 'CAMISA' %}<div class="mt-card__promo" aria-label="Leve 3, pague 2 MT"><span>MT</span><strong>LEVE 3, PAGUE 2</strong></div>{% endif %}</div></article>
-          {% endfor %}
-        </div>
-      </div>
-    </section>
-  {% endif %}
+  {% for block in section.blocks %}
+    {% case block.type %}
+      {% when 'collection_showcase' %}
+        {% assign featured_collection = block.settings.collection %}
+        {% if featured_collection != blank and featured_collection.products_count > 0 %}
+          <section class="mt-section{% if block.settings.background == 'dark' %} mt-section--dark{% else %} mt-section--alternate{% endif %}" {{ block.shopify_attributes }}>
+            <div class="mt-shell">
+              <div class="mt-heading">
+                <div>
+                  {% if block.settings.eyebrow != blank %}<span>{{ block.settings.eyebrow }}</span>{% endif %}
+                  <h2>{{ block.settings.title | default: featured_collection.title }}</h2>
+                  {% if block.settings.message != blank %}<p class="mt-section-message">{{ block.settings.message }}</p>{% endif %}
+                </div>
+                <a href="{{ featured_collection.url }}">{{ block.settings.link_label | default: 'VER TODOS' }}</a>
+              </div>
+              <div class="mt-products">
+                {% for product in featured_collection.products limit: block.settings.products_limit %}
+                  {% assign product_title_upper = product.title | upcase %}
+                  {% assign show_promo = false %}
+                  {% if block.settings.promo_badge and product_title_upper contains 'CAMISA' %}
+                    {% unless product_title_upper contains 'JOGADOR' or product_title_upper contains 'PLAYER' or product_title_upper contains 'RETRÔ' or product_title_upper contains 'RETRO' or product_title_upper contains 'INFANTIL' or product_title_upper contains 'NBA' %}{% assign show_promo = true %}{% endunless %}
+                  {% endif %}
+                  <article class="mt-card">
+                    <a class="mt-card__image" href="{{ product.url }}">{% if product.featured_image %}{{ product.featured_image | image_url: width: 700 | image_tag: loading: 'lazy', alt: product.title }}{% endif %}{% if block.settings.ready_badge %}<span class="mt-card__stock">PRONTA ENTREGA</span>{% endif %}</a>
+                    <div class="mt-card__body"><h3><a href="{{ product.url }}">{{ product.title }}</a></h3><div class="mt-card__price">{{ product.price | money }}</div><div class="mt-card__installment">ou em até 12x no cartão</div>{% if show_promo %}<div class="mt-card__promo" aria-label="Leve 3, pague 2 MT"><span>MT</span><strong>LEVE 3, PAGUE 2</strong></div>{% endif %}</div>
+                  </article>
+                {% endfor %}
+              </div>
+            </div>
+          </section>
+        {% endif %}
 
-  {% if premier != blank and premier.products_count > 0 %}
-    <section class="mt-section mt-section--alternate mt-premier-section"><div class="mt-shell"><div class="mt-heading"><div><span>FUTEBOL INGLÊS</span><h2>Premier League</h2><p class="mt-section-message">Os grandes clubes da Inglaterra reunidos em uma só coleção.</p></div><a href="{{ premier.url }}">VER TODOS</a></div><div class="mt-products">{% for product in premier.products limit: 6 %}{% assign product_title_upper = product.title | upcase %}{% assign show_international_promo = false %}{% if product_title_upper contains 'CAMISA' and product_title_upper contains 'TORCEDOR' %}{% unless product_title_upper contains 'JOGADOR' or product_title_upper contains 'PLAYER' or product_title_upper contains 'RETRÔ' or product_title_upper contains 'RETRO' or product_title_upper contains 'INFANTIL' or product_title_upper contains 'NBA' %}{% assign show_international_promo = true %}{% endunless %}{% endif %}<article class="mt-card"><a class="mt-card__image" href="{{ product.url }}">{% if product.featured_image %}{{ product.featured_image | image_url: width: 700 | image_tag: loading: 'lazy', alt: product.title }}{% endif %}</a><div class="mt-card__body"><h3><a href="{{ product.url }}">{{ product.title }}</a></h3><div class="mt-card__price">{{ product.price | money }}</div><div class="mt-card__installment">ou em até 12x no cartão</div>{% if show_international_promo %}<div class="mt-card__promo" aria-label="Leve 3, pague 2 MT"><span>MT</span><strong>LEVE 3, PAGUE 2</strong></div>{% endif %}</div></article>{% endfor %}</div></div></section>
-  {% endif %}
+      {% when 'categories' %}
+        {% assign brasileiros = collections['camisas-nacionais'] %}{% assign europeus = collections['europeus'] %}{% assign selecoes = collections['selecoes'] %}{% assign retro = collections['retro-1'] %}
+        <section class="mt-section mt-categories" {{ block.shopify_attributes }}><div class="mt-shell"><div class="mt-heading"><div><span>ENCONTRE SEU TIME</span><h2>Categorias</h2></div></div><div class="mt-categories__grid"><a class="mt-category mt-category--brasil" href="{{ brasileiros.url | default: '/collections/camisas-nacionais' }}"><div class="mt-category__shade"></div><strong>BRASILEIROS</strong><small>Clubes do futebol nacional</small></a><a class="mt-category mt-category--europe" href="{{ europeus.url | default: '/collections/europeus' }}"><div class="mt-category__shade"></div><strong>EUROPEUS</strong><small>Os gigantes da Europa</small></a><a class="mt-category mt-category--selections" href="{{ selecoes.url | default: '/collections/selecoes' }}"><div class="mt-category__shade"></div><strong>SELEÇÕES</strong><small>Camisas de seleções</small></a><a class="mt-category mt-category--retro" href="{{ retro.url | default: '/collections/retro-1' }}"><div class="mt-category__shade"></div><strong>RETRÔS</strong><small>Clássicos que fizeram história</small></a></div></div></section>
 
-  <section class="mt-section mt-categories"><div class="mt-shell"><div class="mt-heading"><div><span>ENCONTRE SEU TIME</span><h2>Categorias</h2></div></div><div class="mt-categories__grid"><a class="mt-category mt-category--brasil" href="{{ brasileiros.url | default: '/collections/camisas-nacionais' }}"><div class="mt-category__shade"></div><strong>BRASILEIROS</strong><small>Clubes do futebol nacional</small></a><a class="mt-category mt-category--europe" href="{{ europeus.url | default: '/collections/europeus' }}"><div class="mt-category__shade"></div><strong>EUROPEUS</strong><small>Os gigantes da Europa</small></a><a class="mt-category mt-category--selections" href="{{ selecoes.url | default: '/collections/selecoes' }}"><div class="mt-category__shade"></div><strong>SELEÇÕES</strong><small>Camisas de seleções</small></a><a class="mt-category mt-category--retro" href="{{ retro.url | default: '/collections/retro-1' }}"><div class="mt-category__shade"></div><strong>RETRÔS</strong><small>Clássicos que fizeram história</small></a></div></div></section>
+      {% when 'nba_hero' %}
+        {% assign nba = collections['nba-1'] %}<section class="mt-hero mt-hero--nba" {{ block.shopify_attributes }}><div class="mt-hero__photo"></div><div class="mt-hero__shade"></div><div class="mt-shell mt-hero__content"><span class="mt-kicker">BASQUETE</span><h2>REGATAS<br><span>NBA</span></h2><p>Modelos atuais e clássicos para quem vive o basquete.</p><a class="mt-button" href="{{ nba.url | default: '/collections/nba-1' }}">VER REGATAS</a></div></section>
 
-  {% if inverno != blank and inverno.products_count > 0 %}
-    <section class="mt-section mt-section--dark"><div class="mt-shell"><div class="mt-heading"><div><span>PARA OS DIAS FRIOS</span><h2>Conjuntos de Inverno</h2></div><a href="{{ inverno.url }}">VER TODOS</a></div><div class="mt-products">{% for product in inverno.products limit: 6 %}<article class="mt-card"><a class="mt-card__image" href="{{ product.url }}">{% if product.featured_image %}{{ product.featured_image | image_url: width: 700 | image_tag: loading: 'lazy', alt: product.title }}{% endif %}</a><div class="mt-card__body"><h3><a href="{{ product.url }}">{{ product.title }}</a></h3><div class="mt-card__price">{{ product.price | money }}</div><div class="mt-card__installment">ou em até 12x no cartão</div></div></article>{% endfor %}</div></div></section>
-  {% endif %}
-
-  <section class="mt-hero mt-hero--nba"><div class="mt-hero__photo"></div><div class="mt-hero__shade"></div><div class="mt-shell mt-hero__content"><span class="mt-kicker">BASQUETE</span><h2>REGATAS<br><span>NBA</span></h2><p>Modelos atuais e clássicos para quem vive o basquete.</p><a class="mt-button" href="{{ nba.url | default: '/collections/nba-1' }}">VER REGATAS</a></div></section>
-
-  {% if nba != blank and nba.products_count > 0 %}
-    <section class="mt-section mt-section--alternate"><div class="mt-shell"><div class="mt-heading"><div><span>BASQUETE</span><h2>Regatas NBA</h2></div><a href="{{ nba.url }}">VER TODOS</a></div><div class="mt-products">{% for product in nba.products limit: 6 %}<article class="mt-card"><a class="mt-card__image" href="{{ product.url }}">{% if product.featured_image %}{{ product.featured_image | image_url: width: 700 | image_tag: loading: 'lazy', alt: product.title }}{% endif %}</a><div class="mt-card__body"><h3><a href="{{ product.url }}">{{ product.title }}</a></h3><div class="mt-card__price">{{ product.price | money }}</div><div class="mt-card__installment">ou em até 12x no cartão</div></div></article>{% endfor %}</div></div></section>
-  {% endif %}
-
-  <section class="mt-retro-feature">
-    <img class="mt-retro-feature__photo mt-retro-feature__photo--desktop" src="{{ 'mt-ronaldinho-retro-v6.jpg' | asset_url }}" alt="Camisas retrô" loading="lazy">
-    <img class="mt-retro-feature__photo mt-retro-feature__photo--mobile" src="{{ 'mt-ronaldinho-retro-mobile-v20.jpg' | asset_url }}" alt="Camisas retrô" loading="lazy" hidden>
-    <div class="mt-retro-feature__shade"></div>
-    <div class="mt-shell mt-retro-feature__content"><span class="mt-kicker">BOAS LEMBRANÇAS</span><h2>CAMISAS<br>RETRÔ</h2><p>Histórias que marcaram gerações.</p><a class="mt-button" href="{{ retro.url | default: '/collections/retro-1' }}">VER RETRÔS</a></div>
-  </section>
-
-  {% if retro != blank and retro.products_count > 0 %}
-    <section class="mt-section mt-section--dark"><div class="mt-shell"><div class="mt-heading"><div><span>CLÁSSICOS</span><h2>Retrôs</h2></div><a href="{{ retro.url }}">VER TODOS</a></div><div class="mt-products">{% for product in retro.products limit: 6 %}<article class="mt-card"><a class="mt-card__image" href="{{ product.url }}">{% if product.featured_image %}{{ product.featured_image | image_url: width: 700 | image_tag: loading: 'lazy', alt: product.title }}{% endif %}</a><div class="mt-card__body"><h3><a href="{{ product.url }}">{{ product.title }}</a></h3><div class="mt-card__price">{{ product.price | money }}</div><div class="mt-card__installment">ou em até 12x no cartão</div></div></article>{% endfor %}</div></div></section>
-  {% endif %}
+      {% when 'retro_hero' %}
+        {% assign retro = collections['retro-1'] %}<section class="mt-retro-feature" {{ block.shopify_attributes }}><img class="mt-retro-feature__photo mt-retro-feature__photo--desktop" src="{{ 'mt-ronaldinho-retro-v6.jpg' | asset_url }}" alt="Camisas retrô" loading="lazy"><img class="mt-retro-feature__photo mt-retro-feature__photo--mobile" src="{{ 'mt-ronaldinho-retro-mobile-v20.jpg' | asset_url }}" alt="Camisas retrô" loading="lazy" hidden><div class="mt-retro-feature__shade"></div><div class="mt-shell mt-retro-feature__content"><span class="mt-kicker">BOAS LEMBRANÇAS</span><h2>CAMISAS<br>RETRÔ</h2><p>Histórias que marcaram gerações.</p><a class="mt-button" href="{{ retro.url | default: '/collections/retro-1' }}">VER RETRÔS</a></div></section>
+    {% endcase %}
+  {% endfor %}
 </div>
+
 <style>.mt-home .mt-section-message{margin:10px 0 0;color:#aeb3bc;font-size:14px;line-height:1.45;max-width:560px}.mt-home .mt-card__promo strong{grid-row:1/3;align-self:center}@media(max-width:700px){.mt-home .mt-section-message{font-size:12px;margin-top:7px}.mt-home .mt-categories__grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important}}</style>
-{% schema %}{"name":"MT - Home Experience","settings":[],"presets":[{"name":"MT - Home Experience"}]}{% endschema %}
+
+{% schema %}
+{"name":"MT - Home editável","max_blocks":16,"blocks":[{"type":"collection_showcase","name":"Vitrine de coleção","settings":[{"type":"collection","id":"collection","label":"Coleção"},{"type":"text","id":"eyebrow","label":"Texto pequeno","default":"DESTAQUES"},{"type":"text","id":"title","label":"Título"},{"type":"text","id":"message","label":"Frase de efeito"},{"type":"text","id":"link_label","label":"Texto do link","default":"VER TODOS"},{"type":"range","id":"products_limit","label":"Quantidade de produtos","min":4,"max":12,"step":1,"default":6},{"type":"select","id":"background","label":"Fundo","options":[{"value":"dark","label":"Preto"},{"value":"alternate","label":"Cinza"}],"default":"dark"},{"type":"checkbox","id":"ready_badge","label":"Mostrar selo Pronta Entrega","default":false},{"type":"checkbox","id":"promo_badge","label":"Mostrar Leve 3, Pague 2","default":false}]},{"type":"categories","name":"Categorias"},{"type":"nba_hero","name":"Arte NBA"},{"type":"retro_hero","name":"Arte Retrô"}],"presets":[{"name":"MT - Home editável","blocks":[{"type":"collection_showcase"},{"type":"collection_showcase"},{"type":"collection_showcase"},{"type":"collection_showcase"},{"type":"categories"},{"type":"collection_showcase"},{"type":"nba_hero"},{"type":"collection_showcase"},{"type":"retro_hero"},{"type":"collection_showcase"}]}]}
+{% endschema %}
