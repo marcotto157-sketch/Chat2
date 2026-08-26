@@ -1500,10 +1500,20 @@
       },
       "mt-home-experience": {
         "type": "mt-home-experience",
-        "settings": {
-          "ready_collection": "pronta-entrega-🔥",
-          "nba_collection": "nba-1"
-        }
+        "blocks": {
+          "ready_collection": {"type":"collection_showcase","settings":{"collection":"pronta-entrega-🔥","eyebrow":"ENVIO MAIS RÁPIDO","title":"Pronta Entrega","message":"","link_label":"VER TODOS","products_limit":6,"background":"dark","ready_badge":true,"promo_badge":true}},
+          "player_collection": {"type":"collection_showcase","settings":{"collection":"versao-jogador","eyebrow":"PERFORMANCE EM CAMPO","title":"Versão Jogador","message":"Tecnologia, leveza e ajuste de atleta para vestir como os craques.","link_label":"VER TODOS","products_limit":6,"background":"alternate","ready_badge":false,"promo_badge":false}},
+          "selections_collection": {"type":"collection_showcase","settings":{"collection":"selecoes","eyebrow":"VISTA SUAS CORES","title":"Seleções","message":"As camisas das maiores seleções do mundo em um só lugar.","link_label":"VER TODOS","products_limit":6,"background":"dark","ready_badge":false,"promo_badge":true}},
+          "premier_collection": {"type":"collection_showcase","settings":{"collection":"premier-league","eyebrow":"FUTEBOL INGLÊS","title":"Premier League","message":"Os grandes clubes da Inglaterra reunidos em uma só coleção.","link_label":"VER TODOS","products_limit":6,"background":"alternate","ready_badge":false,"promo_badge":true}},
+          "categories_block": {"type":"categories","settings":{}},
+          "winter_collection": {"type":"collection_showcase","settings":{"collection":"kit-de-inverno","eyebrow":"PARA OS DIAS FRIOS","title":"Conjuntos de Inverno","message":"","link_label":"VER TODOS","products_limit":6,"background":"dark","ready_badge":false,"promo_badge":false}},
+          "nba_hero_block": {"type":"nba_hero","settings":{}},
+          "nba_collection": {"type":"collection_showcase","settings":{"collection":"nba-1","eyebrow":"BASQUETE","title":"Regatas NBA","message":"","link_label":"VER TODOS","products_limit":6,"background":"alternate","ready_badge":false,"promo_badge":false}},
+          "retro_hero_block": {"type":"retro_hero","settings":{}},
+          "retro_collection": {"type":"collection_showcase","settings":{"collection":"retro-1","eyebrow":"CLÁSSICOS","title":"Retrôs","message":"","link_label":"VER TODOS","products_limit":6,"background":"dark","ready_badge":false,"promo_badge":false}}
+        },
+        "block_order": ["ready_collection","player_collection","selections_collection","premier_collection","categories_block","winter_collection","nba_hero_block","nba_collection","retro_hero_block","retro_collection"],
+        "settings": {}
       }
     },
     "content_for_index": [
