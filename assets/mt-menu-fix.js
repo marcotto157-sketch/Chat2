@@ -92,7 +92,12 @@ function bindMobile(){
   d.drawer.addEventListener('click',function(e){if(e.target.closest('a'))openMenu(btn,false)});
 }
 
-function run(){installStyles();ensureDesktop();ensureMobileButton();ensureDrawer();bindMobile();}
+function removeLegacyMobileMenu(){
+  var legacy=document.getElementById('mobile-menu');
+  if(legacy)legacy.remove();
+}
+
+function run(){removeLegacyMobileMenu();installStyles();ensureDesktop();ensureMobileButton();ensureDrawer();bindMobile();}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);else run();
 setTimeout(run,200);setTimeout(run,700);setTimeout(run,1500);
 document.addEventListener('shopify:section:load',run);
