@@ -113,13 +113,3 @@ body.template-product #badges-product .badge-icon path{fill:#fff!important;color
 body.template-product .product-block-list__item--description img{clip-path:inset(2.2% 1.8% 1.8% 1.8%)!important}
 /* O tema usa um menu móvel próprio. Esconde o menu legado para evitar a lista branca duplicada. */
 @media screen and (max-width:999px){#mobile-menu.mobile-menu{display:none!important;visibility:hidden!important;opacity:0!important;max-height:0!important}}
-/* A home é escura: mantém títulos e chamadas sempre legíveis, inclusive após estilos do tema/editor. */
-html body .mt-home .mt-heading h2,
-html body .mt-home .mt-heading > a,
-html body .mt-home .mt-heading > div > h2,
-html body .mt-home .mt-section--alternate .mt-heading h2,
-html body .mt-home .mt-section--dark .mt-heading h2{color:#fff!important;opacity:1!important;visibility:visible!important}
-html body .mt-home .mt-section-message{color:#c7cbd2!important}
-.mt-security-seals{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:12px}
-.mt-security-seal{display:flex;align-items:center;gap:7px;min-height:42px;padding:7px 10px;border:1px solid #444b55;border-radius:6px;background:#11141a;color:#fff!important;font-size:10px;font-weight:800;line-height:1.15;text-align:left;text-decoration:none!important}
-.mt-security-seal svg{width:25px;height:25px;flex:0 0 25px;fill:#fff}

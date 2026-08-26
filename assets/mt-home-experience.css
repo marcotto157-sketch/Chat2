@@ -162,3 +162,28 @@
     height:82%!important;
   }
 }
+
+/* V21: fundo preto e textos claros em toda a experiência da home */
+.mt-home,
+.mt-home .mt-section,
+.mt-home .mt-section--alternate,
+.mt-home .mt-section--dark,
+.mt-home .mt-categories {
+  background:#050608!important;
+  color:#fff!important;
+}
+.mt-home .mt-heading,
+.mt-home .mt-heading h2,
+.mt-home .mt-heading > div > h2,
+.mt-home .mt-heading span,
+.mt-home .mt-heading > a,
+.mt-home .mt-section-message {
+  color:#fff!important;
+  opacity:1!important;
+  visibility:visible!important;
+}
+.mt-home .mt-card,
+.mt-home .mt-card__body {
+  background:#12151b!important;
+  color:#fff!important;
+}
