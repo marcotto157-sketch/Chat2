@@ -1,1 +1,1 @@
-{% if request.page_type == 'cart' %}{% capture cartX_snippet_content %}{% include 'cartxCheckoutSnippet' %}{% endcapture %}{% unless cartX_snippet_content contains 'Liquid error' %}{% include 'cartxCheckoutSnippet' %}{% endunless %}{% endif %}
+{% capture cartX_snippet_content %}{% include 'cartxCheckoutSnippet' %}{% endcapture %}{% unless cartX_snippet_content contains 'Liquid error' %}{% include 'cartxCheckoutSnippet' %}{% endunless %}
