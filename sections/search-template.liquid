@@ -181,7 +181,6 @@
                             {%- when 'title-descending' -%}{%- assign search_sort_name = 'Nome: Z–A' -%}
                             {%- when 'created-descending' -%}{%- assign search_sort_name = 'Mais recentes' -%}
                             {%- when 'created-ascending' -%}{%- assign search_sort_name = 'Mais antigos' -%}
-                            {%- when 'best-selling' -%}{%- assign search_sort_name = 'Mais vendidos' -%}
                             {%- else -%}{%- assign search_sort_name = 'Mais relevantes' -%}
                           {%- endcase -%}
 
@@ -202,7 +201,6 @@
                                   </header>
                                   <div class="value-picker__choice-list">
                                     <button class="value-picker__choice-item link {% if search_sort_by == 'relevance' %}is-selected{% endif %}" data-action="select-value" data-value="relevance">Mais relevantes {% render 'icon', icon: 'check-2' %}</button>
-                                    <button class="value-picker__choice-item link {% if search_sort_by == 'best-selling' %}is-selected{% endif %}" data-action="select-value" data-value="best-selling">Mais vendidos {% render 'icon', icon: 'check-2' %}</button>
                                     <button class="value-picker__choice-item link {% if search_sort_by == 'price-ascending' %}is-selected{% endif %}" data-action="select-value" data-value="price-ascending">Menor preço {% render 'icon', icon: 'check-2' %}</button>
                                     <button class="value-picker__choice-item link {% if search_sort_by == 'price-descending' %}is-selected{% endif %}" data-action="select-value" data-value="price-descending">Maior preço {% render 'icon', icon: 'check-2' %}</button>
                                     <button class="value-picker__choice-item link {% if search_sort_by == 'title-ascending' %}is-selected{% endif %}" data-action="select-value" data-value="title-ascending">Nome: A–Z {% render 'icon', icon: 'check-2' %}</button>
