@@ -173,6 +173,25 @@
                             </div>
                           </div>
 
+                          {%- assign search_sort_by = search.sort_by | default: search.default_sort_by -%}
+                          <div class="collection__toolbar-item collection__toolbar-item--sort">
+                            <form class="collection__sort-form" action="{{ routes.search_url }}" method="get">
+                              <input type="hidden" name="q" value="{{ search.terms | escape }}">
+                              <input type="hidden" name="type" value="product">
+                              <input type="hidden" name="options[prefix]" value="last">
+
+                              <label for="search-sort-by-{{ section.id }}">Ordenar por:</label>
+                              <div class="select-wrapper">
+                                <select id="search-sort-by-{{ section.id }}" name="sort_by" class="form__field form__field--select" onchange="this.form.submit()">
+                                  {%- for option in search.sort_options -%}
+                                    <option value="{{ option.value | escape }}"{% if option.value == search_sort_by %} selected="selected"{% endif %}>{{ option.name | escape }}</option>
+                                  {%- endfor -%}
+                                </select>
+                                {%- render 'icon', icon: 'arrow-bottom' -%}
+                              </div>
+                            </form>
+                          </div>
+
                           <div class="collection__toolbar-item collection__toolbar-item--layout">
                             <span class="collection__layout-label hidden-phone">{{ 'collection.layout.title' | t }}</span>
 
