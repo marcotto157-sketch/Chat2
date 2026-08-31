@@ -488,9 +488,14 @@
                             </header>
 
                             <div class="value-picker__choice-list">
-                              {%- for option in collection.sort_options -%}
-                                <button class="value-picker__choice-item link {% if option.value == collection_sort_by %}is-selected{% endif %}" data-action="select-value" data-value="{{ option.value }}">{{ option.name }} {% render 'icon', icon: 'check-2' %}</button>
-                              {%- endfor -%}
+                              <button class="value-picker__choice-item link {% if collection_sort_by == 'manual' %}is-selected{% endif %}" data-action="select-value" data-value="manual">Em destaque {% render 'icon', icon: 'check-2' %}</button>
+                              <button class="value-picker__choice-item link {% if collection_sort_by == 'best-selling' %}is-selected{% endif %}" data-action="select-value" data-value="best-selling">Mais vendidos {% render 'icon', icon: 'check-2' %}</button>
+                              <button class="value-picker__choice-item link {% if collection_sort_by == 'price-ascending' %}is-selected{% endif %}" data-action="select-value" data-value="price-ascending">Menor preço {% render 'icon', icon: 'check-2' %}</button>
+                              <button class="value-picker__choice-item link {% if collection_sort_by == 'price-descending' %}is-selected{% endif %}" data-action="select-value" data-value="price-descending">Maior preço {% render 'icon', icon: 'check-2' %}</button>
+                              <button class="value-picker__choice-item link {% if collection_sort_by == 'title-ascending' %}is-selected{% endif %}" data-action="select-value" data-value="title-ascending">Nome: A–Z {% render 'icon', icon: 'check-2' %}</button>
+                              <button class="value-picker__choice-item link {% if collection_sort_by == 'title-descending' %}is-selected{% endif %}" data-action="select-value" data-value="title-descending">Nome: Z–A {% render 'icon', icon: 'check-2' %}</button>
+                              <button class="value-picker__choice-item link {% if collection_sort_by == 'created-descending' %}is-selected{% endif %}" data-action="select-value" data-value="created-descending">Mais recentes {% render 'icon', icon: 'check-2' %}</button>
+                              <button class="value-picker__choice-item link {% if collection_sort_by == 'created-ascending' %}is-selected{% endif %}" data-action="select-value" data-value="created-ascending">Mais antigos {% render 'icon', icon: 'check-2' %}</button>
                             </div>
                           </div>
                         </div>

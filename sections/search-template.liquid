@@ -23,7 +23,7 @@
 
 {%- capture section_settings -%}
 {
-  "currentSortBy": "",
+  "currentSortBy": {{ search.sort_by | default: search.default_sort_by | json }},
   "currentTags": [],
   "filterMode": "",
   "defaultLayout": {{ section.settings.default_view_layout | json }},
@@ -174,22 +174,45 @@
                           </div>
 
                           {%- assign search_sort_by = search.sort_by | default: search.default_sort_by -%}
-                          <div class="collection__toolbar-item collection__toolbar-item--sort">
-                            <form class="collection__sort-form" action="{{ routes.search_url }}" method="get">
-                              <input type="hidden" name="q" value="{{ search.terms | escape }}">
-                              <input type="hidden" name="type" value="product">
-                              <input type="hidden" name="options[prefix]" value="last">
+                          {%- case search_sort_by -%}
+                            {%- when 'price-ascending' -%}{%- assign search_sort_name = 'Menor preço' -%}
+                            {%- when 'price-descending' -%}{%- assign search_sort_name = 'Maior preço' -%}
+                            {%- when 'title-ascending' -%}{%- assign search_sort_name = 'Nome: A–Z' -%}
+                            {%- when 'title-descending' -%}{%- assign search_sort_name = 'Nome: Z–A' -%}
+                            {%- when 'created-descending' -%}{%- assign search_sort_name = 'Mais recentes' -%}
+                            {%- when 'created-ascending' -%}{%- assign search_sort_name = 'Mais antigos' -%}
+                            {%- when 'best-selling' -%}{%- assign search_sort_name = 'Mais vendidos' -%}
+                            {%- else -%}{%- assign search_sort_name = 'Mais relevantes' -%}
+                          {%- endcase -%}
 
-                              <label for="search-sort-by-{{ section.id }}">Ordenar por:</label>
-                              <div class="select-wrapper">
-                                <select id="search-sort-by-{{ section.id }}" name="sort_by" class="form__field form__field--select" onchange="this.form.submit()">
-                                  {%- for option in search.sort_options -%}
-                                    <option value="{{ option.value | escape }}"{% if option.value == search_sort_by %} selected="selected"{% endif %}>{{ option.name | escape }}</option>
-                                  {%- endfor -%}
-                                </select>
-                                {%- render 'icon', icon: 'arrow-bottom' -%}
+                          <div class="collection__toolbar-item collection__toolbar-item--sort">
+                            <div class="value-picker-wrapper">
+                              <button class="value-picker-button" aria-haspopup="true" aria-expanded="false" aria-controls="search-sort-by-selector-{{ section.id }}" data-action="open-value-picker">
+                                <span class="hidden-tablet-and-up">Ordenar</span><!--
+                                --><span class="hidden-phone">Ordenar: {{ search_sort_name }}</span><!--
+                                -->{%- render 'icon', icon: 'arrow-bottom' -%}
+                              </button>
+
+                              <div id="search-sort-by-selector-{{ section.id }}" class="value-picker" aria-hidden="true">
+                                {% render 'icon', icon: 'nav-triangle-borderless' %}
+                                <div class="value-picker__inner">
+                                  <header class="value-picker__header">
+                                    <span class="value-picker__title text--strong">Ordenar produtos</span>
+                                    <button class="value-picker__close" data-action="close-value-picker" aria-controls="search-sort-by-selector-{{ section.id }}" aria-label="{{ 'general.accessibility.close' | t }}">{% render 'icon', icon: 'close' %}</button>
+                                  </header>
+                                  <div class="value-picker__choice-list">
+                                    <button class="value-picker__choice-item link {% if search_sort_by == 'relevance' %}is-selected{% endif %}" data-action="select-value" data-value="relevance">Mais relevantes {% render 'icon', icon: 'check-2' %}</button>
+                                    <button class="value-picker__choice-item link {% if search_sort_by == 'best-selling' %}is-selected{% endif %}" data-action="select-value" data-value="best-selling">Mais vendidos {% render 'icon', icon: 'check-2' %}</button>
+                                    <button class="value-picker__choice-item link {% if search_sort_by == 'price-ascending' %}is-selected{% endif %}" data-action="select-value" data-value="price-ascending">Menor preço {% render 'icon', icon: 'check-2' %}</button>
+                                    <button class="value-picker__choice-item link {% if search_sort_by == 'price-descending' %}is-selected{% endif %}" data-action="select-value" data-value="price-descending">Maior preço {% render 'icon', icon: 'check-2' %}</button>
+                                    <button class="value-picker__choice-item link {% if search_sort_by == 'title-ascending' %}is-selected{% endif %}" data-action="select-value" data-value="title-ascending">Nome: A–Z {% render 'icon', icon: 'check-2' %}</button>
+                                    <button class="value-picker__choice-item link {% if search_sort_by == 'title-descending' %}is-selected{% endif %}" data-action="select-value" data-value="title-descending">Nome: Z–A {% render 'icon', icon: 'check-2' %}</button>
+                                    <button class="value-picker__choice-item link {% if search_sort_by == 'created-descending' %}is-selected{% endif %}" data-action="select-value" data-value="created-descending">Mais recentes {% render 'icon', icon: 'check-2' %}</button>
+                                    <button class="value-picker__choice-item link {% if search_sort_by == 'created-ascending' %}is-selected{% endif %}" data-action="select-value" data-value="created-ascending">Mais antigos {% render 'icon', icon: 'check-2' %}</button>
+                                  </div>
+                                </div>
                               </div>
-                            </form>
+                            </div>
                           </div>
 
                           <div class="collection__toolbar-item collection__toolbar-item--layout">
