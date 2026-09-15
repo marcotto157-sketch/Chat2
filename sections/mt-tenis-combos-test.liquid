@@ -1,0 +1,68 @@
+{%- liquid
+  assign tenis_collection = collections[section.settings.tenis_collection]
+  assign psg_shirt = all_products[section.settings.psg_shirt]
+  assign psg_shoe = all_products[section.settings.psg_shoe]
+  assign barcelona_shirt = all_products[section.settings.barcelona_shirt]
+  assign barcelona_shoe = all_products[section.settings.barcelona_shoe]
+-%}
+<section class="mt-tenis-combos" data-section-id="{{ section.id }}">
+  <div class="mt-tenis-combos__inner">
+    <div class="mt-tenis-combos__heading">
+      <div><span class="mt-tenis-combos__eyebrow">{{ section.settings.tenis_eyebrow }}</span><h2>{{ section.settings.tenis_title }}</h2><p>{{ section.settings.tenis_description }}</p></div>
+      <a href="{{ tenis_collection.url }}" class="mt-tenis-combos__all">Ver todos</a>
+    </div>
+    <div class="mt-tenis-combos__rail" aria-label="{{ section.settings.tenis_title | escape }}">
+      {%- for product in tenis_collection.products limit: section.settings.products_to_show -%}
+        <a class="mt-tenis-card" href="{{ product.url }}">
+          <div class="mt-tenis-card__media">
+            {%- if product.featured_image -%}{{ product.featured_image | image_url: width: 720 | image_tag: loading: 'lazy', widths: '240, 360, 480, 720', sizes: '(max-width: 749px) 68vw, 280px', alt: product.title }}{%- endif -%}
+            <span>{% if product.tags contains 'Feminino' %}Feminino{% else %}Masculino{% endif %}</span>
+          </div>
+          <div class="mt-tenis-card__body"><h3>{{ product.title }}</h3><strong>{{ product.price | money }}</strong><small>Escolha sua numeração</small></div>
+        </a>
+      {%- endfor -%}
+    </div>
+    <div class="mt-combos">
+      <div class="mt-combos__heading"><span class="mt-tenis-combos__eyebrow">{{ section.settings.combo_eyebrow }}</span><h2>{{ section.settings.combo_title }}</h2><p>{{ section.settings.combo_description }}</p></div>
+      <div class="mt-combos__stage" data-combo-stage>
+        {%- if psg_shirt != blank and psg_shoe != blank -%}
+          <article class="mt-combo-card" data-combo-card>
+            <div class="mt-combo-card__visuals"><a href="{{ psg_shirt.url }}">{{ psg_shirt.featured_image | image_url: width: 720 | image_tag: loading: 'lazy', widths: '240, 360, 480, 720', sizes: '(max-width: 749px) 44vw, 260px', alt: psg_shirt.title }}</a><span>+</span><a href="{{ psg_shoe.url }}">{{ psg_shoe.featured_image | image_url: width: 720 | image_tag: loading: 'lazy', widths: '240, 360, 480, 720', sizes: '(max-width: 749px) 44vw, 260px', alt: psg_shoe.title }}</a></div>
+            <div class="mt-combo-card__body"><span class="mt-combo-card__club">Paris Saint-Germain</span><h3>Camisa PSG + Air Max TN PSG</h3><p>Escolha o tamanho da camisa e a numeração do tênis.</p><div class="mt-combo-card__links"><a href="{{ psg_shirt.url }}">Ver camisa</a><a href="{{ psg_shoe.url }}">Ver tênis</a></div></div>
+          </article>
+        {%- endif -%}
+        {%- if barcelona_shirt != blank and barcelona_shoe != blank -%}
+          <article class="mt-combo-card" data-combo-card>
+            <div class="mt-combo-card__visuals"><a href="{{ barcelona_shirt.url }}">{{ barcelona_shirt.featured_image | image_url: width: 720 | image_tag: loading: 'lazy', widths: '240, 360, 480, 720', sizes: '(max-width: 749px) 44vw, 260px', alt: barcelona_shirt.title }}</a><span>+</span><a href="{{ barcelona_shoe.url }}">{{ barcelona_shoe.featured_image | image_url: width: 720 | image_tag: loading: 'lazy', widths: '240, 360, 480, 720', sizes: '(max-width: 749px) 44vw, 260px', alt: barcelona_shoe.title }}</a></div>
+            <div class="mt-combo-card__body"><span class="mt-combo-card__club">FC Barcelona</span><h3>Camisa Barcelona + Air Max TN Barcelona</h3><p>Escolha o tamanho da camisa e a numeração do tênis.</p><div class="mt-combo-card__links"><a href="{{ barcelona_shirt.url }}">Ver camisa</a><a href="{{ barcelona_shoe.url }}">Ver tênis</a></div></div>
+          </article>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+<style>
+  .mt-tenis-combos{background:#050505;color:#fff;padding:42px 0 54px}.mt-tenis-combos__inner{max-width:1240px;margin:0 auto;padding:0 18px}.mt-tenis-combos__heading,.mt-combos__heading{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:20px}.mt-tenis-combos__heading h2,.mt-combos__heading h2{color:#fff;font-size:clamp(26px,4vw,42px);line-height:1.05;margin:5px 0 8px}.mt-tenis-combos__heading p,.mt-combos__heading p{color:#bcbcbc;margin:0;max-width:650px}.mt-tenis-combos__eyebrow,.mt-combo-card__club{color:#d8ff2f;font-size:12px;font-weight:900;letter-spacing:.12em;text-transform:uppercase}.mt-tenis-combos__all{border:1px solid #fff;border-radius:999px;color:#fff;flex:0 0 auto;font-weight:800;padding:10px 18px;text-decoration:none}.mt-tenis-combos__rail{display:flex;gap:14px;overflow-x:auto;padding:2px 2px 18px;scroll-snap-type:x mandatory;scrollbar-width:thin}.mt-tenis-card{background:#111;border:1px solid #242424;border-radius:14px;color:#fff;flex:0 0 min(72vw,280px);overflow:hidden;scroll-snap-align:start;text-decoration:none}.mt-tenis-card__media{aspect-ratio:1/1;background:#f1f1f1;position:relative}.mt-tenis-card__media img{height:100%;object-fit:cover;width:100%}.mt-tenis-card__media span{background:#050505;border-radius:999px;bottom:10px;color:#fff;font-size:10px;font-weight:900;left:10px;padding:6px 9px;position:absolute;text-transform:uppercase}.mt-tenis-card__body{padding:14px}.mt-tenis-card__body h3{color:#fff;font-size:15px;line-height:1.35;margin:0 0 8px}.mt-tenis-card__body strong{color:#d8ff2f;display:block;font-size:18px}.mt-tenis-card__body small{color:#999;display:block;margin-top:5px}.mt-combos{border-top:1px solid #292929;margin-top:35px;padding-top:40px}.mt-combos__heading{display:block}.mt-combos__stage{display:grid;gap:18px;grid-template-columns:repeat(2,minmax(0,1fr))}.mt-combo-card{background:linear-gradient(145deg,#161616,#0c0c0c);border:1px solid #292929;border-radius:18px;overflow:hidden;transition:opacity .28s ease,transform .28s ease}.mt-combo-card.is-changing{opacity:.25;transform:translateY(5px)}.mt-combo-card__visuals{align-items:center;display:grid;gap:8px;grid-template-columns:1fr auto 1fr;padding:14px}.mt-combo-card__visuals a{aspect-ratio:1/1;background:#eee;border-radius:12px;display:block;overflow:hidden}.mt-combo-card__visuals img{height:100%;object-fit:cover;width:100%}.mt-combo-card__visuals>span{color:#d8ff2f;font-size:28px;font-weight:900}.mt-combo-card__body{padding:4px 18px 20px}.mt-combo-card__body h3{color:#fff;font-size:21px;margin:6px 0}.mt-combo-card__body p{color:#aaa;margin:0 0 14px}.mt-combo-card__links{display:flex;gap:10px}.mt-combo-card__links a{background:#fff;border-radius:999px;color:#090909;font-size:12px;font-weight:900;padding:9px 14px;text-decoration:none}.mt-combo-card__links a:last-child{background:#d8ff2f}@media(max-width:749px){.mt-tenis-combos{padding:32px 0 42px}.mt-tenis-combos__heading{align-items:flex-start}.mt-tenis-combos__all{font-size:12px;padding:8px 12px}.mt-combos__stage{grid-template-columns:1fr}.mt-combo-card__body h3{font-size:18px}}
+</style>
+<script>
+  (() => {
+    const section = document.querySelector('[data-section-id="{{ section.id }}"]');
+    if (!section) return;
+    const stage = section.querySelector('[data-combo-stage]');
+    if (!stage) return;
+    const rotate = () => {
+      const cards = Array.from(stage.querySelectorAll('[data-combo-card]'));
+      if (cards.length < 2) return;
+      cards.forEach((card) => card.classList.add('is-changing'));
+      window.setTimeout(() => {
+        stage.appendChild(cards[0]);
+        cards.forEach((card) => card.classList.remove('is-changing'));
+      }, 280);
+    };
+    if (Math.random() > 0.5) rotate();
+    window.setInterval(rotate, 6500);
+  })();
+</script>
+{% schema %}
+{"name":"Tênis e combos teste","settings":[{"type":"collection","id":"tenis_collection","label":"Coleção de tênis","default":"tenis"},{"type":"text","id":"tenis_eyebrow","label":"Chamada dos tênis","default":"Novidade MT Sports"},{"type":"text","id":"tenis_title","label":"Título dos tênis","default":"Tênis para completar o seu estilo"},{"type":"textarea","id":"tenis_description","label":"Descrição dos tênis","default":"Modelos selecionados, qualidade premium e numerações disponíveis para você escolher."},{"type":"range","id":"products_to_show","label":"Quantidade de tênis","min":4,"max":20,"step":1,"default":10},{"type":"text","id":"combo_eyebrow","label":"Chamada dos combos","default":"Monte o visual completo"},{"type":"text","id":"combo_title","label":"Título dos combos","default":"Combos Camisa + Tênis"},{"type":"textarea","id":"combo_description","label":"Descrição dos combos","default":"Uma prévia dos conjuntos que estamos preparando. As sugestões mudam automaticamente."},{"type":"product","id":"psg_shirt","label":"Camisa PSG","default":"camisa-i-psg-26-27-jogador-masculina-pronta-entrega"},{"type":"product","id":"psg_shoe","label":"Tênis PSG","default":"tenis-air-max-tn-psg-masculino"},{"type":"product","id":"barcelona_shirt","label":"Camisa Barcelona","default":"camisa-barcelona-i-25-26-torcedor-masculina-azul-e-grena"},{"type":"product","id":"barcelona_shoe","label":"Tênis Barcelona","default":"tenis-air-max-tn-barcelona-masculino"}],"presets":[{"name":"Tênis e combos teste"}]}
+{% endschema %}
